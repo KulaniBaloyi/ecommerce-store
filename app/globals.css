@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  min-width: 280px;
+  max-width: 100%;
+
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 5px; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #00bcd4; 
+  border-radius: 5px; 
+}
+
+.sub-heading{
+  font-family: "AdineuePRO",sans-serif;
+}
+
+.cartMenu-open{
+    overflow: hidden;
+}
