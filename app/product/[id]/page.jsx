@@ -1,4 +1,4 @@
-import AddToCart from "@/app/components/Footer"
+import AddToCart from "@/app/components/AddToCart"
 import Related from "@/app/components/Related"
 import { prisma } from "@/lib/db"
 import { formatCurrency } from "@/utils/currency-formatter"

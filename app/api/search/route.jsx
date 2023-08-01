@@ -39,5 +39,5 @@ export async function GET(request) {
     }
   });
 
-  return NextResponse.json(results);
+  return NextResponse.json(results)
 }
