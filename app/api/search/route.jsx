@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 
 export async function GET(request) {
@@ -7,37 +7,32 @@ export async function GET(request) {
 
   // Fetch results based on query (using "contains" operator)
   const results = await prisma.product.findMany({
-    where:{
-      OR:[
+    where: {
+      OR: [
         {
           name: {
             contains: search_query,
-            //mode: "insensitive",
+            mode: "insensitive",
           }
-        
         },
         {
           brand: {
-            name:{contains: search_query},
-            //mode: "insensitive",
+            name: { contains: search_query },
+            mode: "insensitive",
           }
-        
         },
         {
           category: {
-            name:{contains: search_query},
-            //mode:"insensitive"
+            name: { contains: search_query },
+            mode: "insensitive"
           }
-        
         },
-      ] ,
+      ],
     },
-   
-
-    include:{
-      brand:true
+    include: {
+      brand: true
     }
   });
 
-  return NextResponse.json(results)
+  return NextResponse.json(results);
 }
