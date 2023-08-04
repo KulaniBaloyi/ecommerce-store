@@ -13,10 +13,10 @@ const page = async({params}) => {
 
   })
 
-  if (product==undefined||null)return <div className="min-h-screen grid place-content-center ">Item doesnt exist</div>
+  if (product==undefined||null)return <div className="mt-20 min-h-[calc(100dvh-5rem)] grid place-content-center ">Item doesnt exist</div>
   return (
     <>
-    <div className="min-h-screen  text-3xl gap-10 grid grid-cols-1 lg:grid-cols-2 w-[90%] mx-auto py-10">
+    <div className="mt-20 min-h-[calc(100dvh-5rem)] text-3xl gap-10 grid grid-cols-1 lg:grid-cols-2 w-[90%] mx-auto py-10">
         <div className="flex flex-col gap-5">
             {/**this will load the first picture */}
         <div className="rounded-md border w-full aspect-square relative">

@@ -4,18 +4,25 @@ import Landing from './components/Landing'
 import { prisma } from '@/lib/db'
 
 export default async function Home() {
+  //const idelete = await prisma.product.deleteMany()
+  // const deletedProduct = await prisma.product.deleteMany({
+  //   where: { name: "Chuck Taylor All Star Classic" },
+  // });
+
   const proj = await prisma.product.upsert({
-    where: { name: "Nike Free Metcon 5 Sequoia" },
-    update: {},
+    where: { name: "SLIP-ON MULE TRK SHOE" },
+    update: {
+    },
+  
     create: {
-      name: "Nike Free Metcon 5 Sequoia",
-      price: 2399.95,
+      name: "SLIP-ON MULE TRK SHOE",
+      price: 1299,
       images: [
-        "https://res.cloudinary.com/davgj9opq/image/upload/v1691093216/nike-free-metcon5-5-sequoia_rgo5sy.jpg",
-        "https://res.cloudinary.com/davgj9opq/image/upload/v1691093216/nike-free-metcon5-1-sequoia_drcas6.jpg",
-        "https://res.cloudinary.com/davgj9opq/image/upload/v1691093216/nike-free-metcon5-3-sequoia_or2huz.jpg",
-        "https://res.cloudinary.com/davgj9opq/image/upload/v1691093216/nike-free-metcon5-2-sequoia_g2luaj.jpg",
-        "https://res.cloudinary.com/davgj9opq/image/upload/v1691093216/nike-free-metcon5-4-sequoia_c5dr6d.jpg",
+        "https://cdn.zando.co.za/p/428654-7499-456824-2-600x.jpg",
+        "https://cdn.zando.co.za/p/428654-7479-456824-1-600x.jpg",
+        "https://cdn.zando.co.za/p/428654-7499-456824-4-600x.jpg",
+       
+        
       ],
       category: {
         connectOrCreate: {
@@ -30,9 +37,9 @@ export default async function Home() {
       brand: {
         connectOrCreate: {
           create: {
-            name: "Nike",
+            name: "Vans",
           },
-          where:{name:"Nike"}
+          where:{name:"Vans"}
         },
       },
     },
@@ -41,7 +48,7 @@ export default async function Home() {
   
   
   return (
-    <main className='w-[90%] mx-auto py-5 flex flex-col gap-10'>
+    <main className=' flex flex-col gap-10'>
       <Landing/>
       <Featured/>
      

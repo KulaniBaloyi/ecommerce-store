@@ -57,34 +57,27 @@ const Header = () => {
   return (
     <>
     
-    <header className=" shadow-sm shadow-neutral-200 p-5 flex justify-between items-center relative">
+    <header className="absolute left-0 right-0 top-0 z-[99]  p-5 flex justify-between items-center">
     
-      <svg onClick={()=>{handleOpenMenu()}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 cursor-pointer flex md:hidden">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
-        </svg>
-       <div className="flex items-center gap-2">
+    
+        <Link href={'/'}>
+       <div className="flex items-center gap-2 flex-1">
      <div className="text-white font-semibold italic grid place-content-center bg-emerald-500 rounded-lg aspect-square h-12">
       K
      </div>
-
-        <Link href={'/'}><h1 className=" sub-heading text-xl font-semibold">Store</h1></Link>
-       
+     <h1 className=" sub-heading text-xl font-semibold">Store</h1>
        </div>
+       </Link>
         
      
 
         
-        {/**search icon large screen */}
+      
         <div className="flex gap-2 items-center">
-          <div onClick={()=>handleOpenSearchModal()} className="border rounded-md p-2 px-5 hidden place-content-center md:grid">
-            <button className="cursor-pointer" >Search...</button>
-          </div>
-          {/**search icon small screen */}
-          <svg onClick={()=>handleOpenSearchModal()} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="md:hidden w-4 h-4 cursor-pointer">
-         <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
-          </svg>
-
-        {/**cart icon */}
+        <svg onClick={()=>{handleOpenMenu()}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 cursor-pointer flex md:hidden">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
+        </svg>
+     
           <div className="relative"  onClick={()=>handleOpenCart()}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 md:h-5 md:w-5 cursor-pointer">
             

@@ -44,7 +44,7 @@ const CartPage = () => {
 
     if(!isMounted)return null
 
-    if(cartItems.length===0)return(<div className="min-h-screen w-[90%] mx-auto p-5">
+    if(cartItems.length===0)return(<div className="mt-20 min-h-[calc(100dvh-5rem)] w-[95%] mx-auto p-5">
        <h1 className="col-span-5 lg:col-span-3 text-3xl text-gray-600">Your Cart</h1>
        <div className="rounded-lg border  grid place-content-center my-5">
         Cart is empty
@@ -52,7 +52,7 @@ const CartPage = () => {
 
     </div>)
   return (
-    <main className="min-h-screen w-[90%] mx-auto py-5"> 
+    <main className="mt-20 min-h-[calc(100dvh-5rem)] w-[95%] mx-auto py-5"> 
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
     <h1 className="col-span-5 lg:col-span-3 text-3xl text-gray-600">Your Cart</h1>
     <div className="col-span-5 flex flex-col gap-5 lg:col-span-3 ">
