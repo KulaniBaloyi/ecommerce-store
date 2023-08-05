@@ -31,7 +31,7 @@ const StoreItem = ({name,price,id,brand,images}) => {
            
         </div>
         <div className=' flex-[0.3]'>
-                <h2 className="capitalize">{name}</h2>
+                <h2 className="capitalize text-sm">{name}</h2>
                
                 <h2 className="text-gray-500">{brand?.name}</h2>
                 <h2 className=" font-semibold">{formatCurrency(price)}</h2>
