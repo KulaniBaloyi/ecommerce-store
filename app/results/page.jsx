@@ -26,7 +26,7 @@ const search = useSearchParams();
   },[])
   const fetchResults = async () => {
     try {
-      const res = await fetch(`${process.env.BASE_URL}=${searchQuery}`);
+      const res = await fetch(`https://ecommerce-store-kb.vercel.app/api/search?search_query=${searchQuery}`);
       if (res.ok) {
         const data = await res.json(); // Parse the response to JSON
         setResults(data)
