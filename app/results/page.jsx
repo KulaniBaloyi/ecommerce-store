@@ -16,10 +16,8 @@ const search = useSearchParams();
   const encodedSearchQuery = encodeURI(searchQuery)
   if (!encodedSearchQuery) {
     router.push("/")
-
     //make an async call to fetch results that match include on either name|description|brand|category
   }
-
   useEffect(()=>{
     setIsMounted(true)
     setDisplayQuery(searchQuery)
