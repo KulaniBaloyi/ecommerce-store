@@ -1,5 +1,5 @@
 import Landing from "@/app/components/Landing"
-import { prisma } from "@/app/lib/db"
+import { prisma } from "@/lib/db"
 
 import StoreItem from "@/app/components/StoreItem"
 const page = async({params}) => {

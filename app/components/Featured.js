@@ -1,5 +1,5 @@
 import StoreItem from './StoreItem'
-import { prisma } from "@/lib/db"
+import { prisma } from '@/lib/db'
 
 const Featured = async() => {
   //fetch all products where featured is true limit result to 8

@@ -1,7 +1,7 @@
 
 import Featured from './components/Featured'
 import Landing from './components/Landing'
-import { prisma } from '@/lib/db'
+
 
 export default async function Home() {
 
