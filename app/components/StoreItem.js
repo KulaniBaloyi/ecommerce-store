@@ -24,14 +24,14 @@ const StoreItem = ({name,price,id,brand,images}) => {
  
  
   return (
-    <div onClick={()=>handleClick()} className='cursor-pointer group rounded-xl p-5 md:p-3 w-full h-full border shadow-sm shadow-gray-200 flex flex-col gap-2'>
-        <div className=' relative w-full aspect-square rounded-md overflow-hidden border text-white grid place-content-center'>
+    <div onClick={()=>handleClick()} className='cursor-pointer group rounded-lg p-2 md:p-3 w-full h-full border shadow-sm shadow-gray-200 flex flex-col gap-2'>
+        <div className=' relative w-full aspect-square rounded-md overflow-hidden text-white grid place-content-center'>
            <Image src={images[0]} alt={name} fill/>
           <StoreItemFunc id={id} name={name} price={price} image={images[0]}/>
            
         </div>
         <div className=' flex-[0.3]'>
-                <h2 className="capitalize text-sm">{name}</h2>
+                <h2 className="capitalize">{name}</h2>
                
                 <h2 className="text-gray-500">{brand?.name}</h2>
                 <h2 className=" font-semibold">{formatCurrency(price)}</h2>

@@ -5,7 +5,7 @@ import usePreviewModal from "@/app/actions/use-preview-modal"
 import useCart from "@/app/hooks/use-cart"
 
 
-const PreviewModal = () => {
+const PreviewModal = ({product}) => {
   const [isMounted,setIsMounted] = useState(false)
   
 

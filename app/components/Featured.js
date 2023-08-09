@@ -9,9 +9,9 @@ const Featured = async() => {
       }
     })
   return (
-    <div className=' p-2'>
+    <div className='p-5'>
         <h2 className='font-semi-bold sub-heading text-3xl'>Featured Products</h2>
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 h-full w-full my-5">
+        <section className="grid grid-cols-2 lg:grid-cols-4 gap-5 h-full w-full my-5">
              {products&&products.map((prod)=>{
                 return  <StoreItem key={prod.id} {...prod}/>
             })} 

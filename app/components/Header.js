@@ -14,6 +14,29 @@ const Header = () => {
   const [isMounted,setIsMounted]= useState(false)
   const openCart = useCartMenu((state)=>state.onOpen)  
   const items = useCart((state)=>state.items)
+  const [isScrolled, setIsScrolled] = useState(false)
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100); // Adjust the threshold as needed
+    }
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }, [])
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 300); // Adjust the threshold as needed
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
     const openMenu = useMenu((state)=>state.onOpen)
    
     const pathname = usePathname()
@@ -45,15 +68,15 @@ const Header = () => {
   return (
     <>
     
-    <header className="absolute left-0 right-0 top-0 z-[99]  p-5 flex justify-between items-center">
+    <header className={`${isScrolled&&'bg-white/95 text-black'} fixed bg-transparent left-0 right-0 top-0 z-[99]  p-5 flex justify-between items-center`}>
     
     
         <Link href={'/'}>
        <div className="flex items-center gap-5 flex-1">
-     <div className="text-white font-semibold italic grid place-content-center bg-emerald-500 rounded-lg aspect-square h-12">
+     <div className={`${isScrolled&&'text-black'} font-semibold italic grid place-content-center bg-emerald-500 rounded-lg aspect-square h-12`}>
       K
      </div>
-     <h1 className={` tracking-[16px] text-xl font-semibold ${isHomePage&&'text-white'}`}>Store</h1>
+     <h1 className={` tracking-[16px] text-xl font-semibold text-black ${isHomePage&&!isScrolled&&'text-white'} ${isScrolled&&'text-black'} `}>Store</h1>
        </div>
        </Link>
         
