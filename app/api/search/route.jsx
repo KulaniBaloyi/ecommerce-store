@@ -1,9 +1,10 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db';
 
+
+
 export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const search_query = searchParams.get('search_query');
+  const search_query = request.nextUrl.searchParams.get('search_query')
 
   // Fetch results based on query (using "contains" operator)
   const results = await prisma.product.findMany({
@@ -12,19 +13,19 @@ export async function GET(request) {
         {
           name: {
             contains: search_query,
-            mode: "insensitive",
+           // mode: "insensitive",
           }
         },
         {
           brand: {
             name: { contains: search_query },
-            mode: "insensitive",
+           // mode: "insensitive",
           }
         },
         {
           category: {
             name: { contains: search_query },
-            mode: "insensitive"
+           // mode: "insensitive"
           }
         },
       ],

@@ -1,8 +1,10 @@
 
 import { prisma } from '../lib/db'
 
-const getProducts = async() => {
-    const res = await prisma.product.findMany()
+const getProducts = async(query) => {
+    const res = await prisma.product.findMany({
+      where:{brand:query}
+    })
   return res
 }
 
