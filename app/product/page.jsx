@@ -122,7 +122,7 @@ useEffect(()=>{
         <div className="flex-1 lg:flex-[.75] grid grid-cols-2 lg:grid-cols-3 gap-5 place-content-start">
             {products&&products.map((item)=>{
                 if(isLoading){
-                    return  <div  className='rounded-lg p-1 lg:p-2 w-full h-full border shadow-sm shadow-gray-200 flex flex-col gap-2'>
+                    return  <div key={item.id} className='rounded-lg p-1 lg:p-2 w-full h-full border shadow-sm shadow-gray-200 flex flex-col gap-2'>
                     <div className='border bg-gray-200 animate-pulse w-full aspect-square rounded-md'>
                       
                        
@@ -137,7 +137,7 @@ useEffect(()=>{
                         </div>
                 </div>
                 }
-                return  <div className=""><StoreItem key={item.id} {...item}/></div>
+                return  <StoreItem key={item.id} {...item}/>
             })}
            
         </div>        
