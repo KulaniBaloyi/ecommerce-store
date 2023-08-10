@@ -24,7 +24,7 @@ const StoreItem = ({name,price,id,brand,images}) => {
  
  
   return (
-    <div onClick={()=>handleClick()} className='cursor-pointer group rounded-lg p-2 md:p-3 w-full h-full border shadow-sm shadow-gray-200 flex flex-col gap-2'>
+    <div onClick={()=>handleClick()} className='cursor-pointer group rounded-lg p-1 lg:p-2 w-full h-full border shadow-sm shadow-gray-200 flex flex-col gap-2'>
         <div className=' relative w-full aspect-square rounded-md overflow-hidden text-white grid place-content-center'>
            <Image src={images[0]} alt={name} fill/>
           <StoreItemFunc id={id} name={name} price={price} image={images[0]}/>

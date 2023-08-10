@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 const Footer = () => {
   return (
@@ -7,13 +8,13 @@ const Footer = () => {
         <div className="lg:col-span-3  h-full lg:flex items-center lg:p-5">
           <div className="flex flex-col gap-10 items-start">
             <h2 className="tracking-[5px] text-2xl font-semibold">Shop the latest styles</h2>
-            <div className="cursor-pointer flex items-center gap-5 border-b border-black pb-2 hover:pl-5 transition-all duration-500">
+            <Link href='/product' className="cursor-pointer flex items-center gap-5 border-b border-black pb-2 hover:pl-5 transition-all duration-500">
             <h2 className="">Explore Products</h2>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
             </svg>
 
-            </div>
+            </Link>
            
           </div>
         </div>

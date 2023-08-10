@@ -24,7 +24,7 @@ const Landing = () => {
 
  
   return (
-    <div className="relative aspect-square md:aspect-video w-full overflow-hidden flex items-center justify-center">
+    <div className="relative h-[100dvh] md:aspect-video w-full overflow-hidden flex items-center justify-center">
       <form onSubmit={onSearch} className="border rounded-lg bg-white overflow-hidden p-4 min-h-[2.5rem] z-40 w-4/5 lg:w-3/5 flex gap-2 items-center">
         <input value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} type={'text'} placeholder="search..." className="flex-1 h-full border-0 outline-none focus:outline-0"/>
         <svg onClick={()=>setSearchQuery("")} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 cursor-pointer">
