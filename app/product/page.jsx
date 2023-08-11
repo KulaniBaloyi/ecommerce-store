@@ -15,7 +15,7 @@ const Page = () => {
     const [isLoading,setIsLoading]= useState(true)
     const fetchData =async()=>{
         try {
-            const res = await fetch(`commerce-store-kb.vercel.app/api/products`,{
+            const res = await fetch(`https://ecommerce-store-kb.vercel.app/api/products`,{
                 method:"POST",
                 headers: {
                     "Content-Type": "application/json", 

@@ -11,6 +11,11 @@ const Menu = () => {
       closeMenu()
      router.push(`/`)
     }
+
+    const handleSignIn = ()=>{
+      closeMenu()
+     router.push(`/login`)
+    }
     const menu = useMenu((state)=>state.isOpen)
     const handleClose =()=>{
         closeMenu()
@@ -19,6 +24,8 @@ const Menu = () => {
 useEffect(()=>{
     setIsMounted(true)
 },[])
+
+
 
 useEffect(() => {
   if (typeof document !== 'undefined') {
@@ -96,7 +103,7 @@ if(!menu) return null
                   </ul>
                     <div className="flex flex-col gap-5">
                       <h2 className="font-semibold">Account</h2>
-                      <div className="flex justify-between items-center gap-5">
+                      <div onClick={()=>handleSignIn()} className=" flex cursor-pointer justify-between items-center gap-5">
                     <h2 className="text-sm">Sign in</h2>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
                         <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
