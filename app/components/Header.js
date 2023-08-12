@@ -62,13 +62,11 @@ const Header = () => {
       setIsMounted(true)
     }, [])
 
- 
-
     if(!isMounted)return null
   return (
     <>
     
-    <header className={`${isScrolled&&'bg-white/95 text-black'} fixed bg-transparent left-0 right-0 top-0 z-[99]  p-5 flex justify-between items-center`}>
+    <header className={`${isScrolled&&'bg-white/95 text-black border-b shadow-sm'} fixed bg-transparent left-0 right-0 top-0 z-[99]  p-5 flex justify-between items-center`}>
     
     
         <Link href={'/'}>
