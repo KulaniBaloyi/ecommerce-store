@@ -8,8 +8,6 @@ import useSearchModal from "../actions/use-search-modal"
 import useCartMenu from "../actions/use-cart-menu"
 import { usePathname } from 'next/navigation'
 
-
-
 const Header = () => {
   const [isMounted,setIsMounted]= useState(false)
   const openCart = useCartMenu((state)=>state.onOpen)  
@@ -77,9 +75,6 @@ const Header = () => {
      <h1 className={` tracking-[16px] text-xl font-semibold text-black ${isHomePage&&!isScrolled&&'text-white'} ${isScrolled&&'text-black'} `}>Store</h1>
        </div>
        </Link>
-        
-     
-
         
       
         <div className="flex gap-2 items-center">
