@@ -41,8 +41,8 @@ const Page = () => {
         <span className=" text-sm">Not a member? <Link href={"/signup"} className="pb-1 border-b border-black font-semibold">Sign up</Link></span>
        
         <button className="w-full aspect-[16/2] rounded-md text-neutral-900 border border-neutral-900 grid place-content-center">Log in</button>
-        <div className="w-full aspect-[16/2] rounded-md bg-sky-500 text-white grid place-content-center">Google</div>
-        <button className="w-full aspect-[16/2] rounded-md bg-neutral-900 text-white grid place-content-center">Github</button>
+        <div className="w-full aspect-[16/2] rounded-md bg-sky-500 text-white grid place-content-center">Sign in with Google</div>
+        <button className="w-full aspect-[16/2] rounded-md bg-neutral-900 text-white grid place-content-center">Sign in with Github</button>
     </section>
 </div>
   )
