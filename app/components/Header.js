@@ -1,10 +1,8 @@
 "use client"
 import { useState,useEffect } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import useMenu from "../actions/use-menu"
 import useCart from "../hooks/use-cart"
-import useSearchModal from "../actions/use-search-modal"
 import useCartMenu from "../actions/use-cart-menu"
 import { usePathname } from 'next/navigation'
 
@@ -19,7 +17,6 @@ const Header = () => {
     }
   
     window.addEventListener('scroll', handleScroll);
-  
     return () => {
       window.removeEventListener('scroll', handleScroll);
     }
@@ -27,7 +24,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50); // Adjust the threshold as needed
-    };
+    }
   
     window.addEventListener('scroll', handleScroll);
   
