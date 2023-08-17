@@ -12,9 +12,7 @@ import ToastProvider from './providers/toast-provider'
 export const metadata = {
   title: 'Ecommerce Store',
   description: 'Frontend for the entire ecommerce situation',
-  icons:{
-    icon:'/'
-  }
+ 
 }
 
 export default function RootLayout({ children }) {

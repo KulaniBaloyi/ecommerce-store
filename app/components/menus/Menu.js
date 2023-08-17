@@ -65,6 +65,9 @@ if(!menu) return null
                
                 <main className=" h-[75%] overflow-y-auto flex flex-col justify-between relative p-5 ">
                   <ul className="flex flex-col gap-2">
+                    <div className="border rounded-md p-3 my-2">
+                      <input type="text" placeholder="Search..." className="w-full h-full outline-none focus:outline-none border-0"/>
+                    </div>
                     <li className="flex items-center justify-between bg-gray-100 p-3 rounded-md">
                       <h2>Store</h2>
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
@@ -102,7 +105,7 @@ if(!menu) return null
                     </li>
                   </ul>
                     <div className="flex flex-col gap-5">
-                      <h2 className="font-semibold">Account</h2>
+                      <h2 className="font-semibold mt-5">Account</h2>
                       <div onClick={()=>handleSignIn()} className=" flex cursor-pointer justify-between items-center gap-5">
                     <h2 className="text-sm">Sign in</h2>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">

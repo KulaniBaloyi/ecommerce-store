@@ -8,6 +8,7 @@ export default async function Home() {
 
   return (
     <main className='flex flex-col gap-10'>
+
       <Landing/>
       <Featured/>
     

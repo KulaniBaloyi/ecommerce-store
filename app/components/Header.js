@@ -62,9 +62,12 @@ const Header = () => {
     <>
     
     <header className={`${isScrolled&&'bg-white/95 text-black border-b shadow-sm'} fixed bg-transparent left-0 right-0 top-0 z-[99]  p-5 flex justify-between items-center`}>
+      {/**menu--icon */}
+      <svg onClick={()=>{handleOpenMenu()}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 cursor-pointer  flex md:hidden">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
+        </svg>
     
-    
-        <Link href={'/'}>
+        <Link href={'/'} className="">
        <div className="flex items-center gap-5 flex-1">
      <div className={`${isScrolled&&'text-black'} font-semibold italic grid place-content-center bg-emerald-500 rounded-lg aspect-square h-12`}>
       K
@@ -75,10 +78,7 @@ const Header = () => {
         
       
         <div className="flex gap-2 items-center">
-          {/**menu--icon */}
-        <svg onClick={()=>{handleOpenMenu()}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 cursor-pointer  flex md:hidden">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
-        </svg>
+        
      {/**cart--icon */}
           <div className="relative "  onClick={()=>handleOpenCart()}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 md:h-5 md:w-5 cursor-pointer">
