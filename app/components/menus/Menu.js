@@ -25,8 +25,6 @@ useEffect(()=>{
     setIsMounted(true)
 },[])
 
-
-
 useEffect(() => {
   if (typeof document !== 'undefined') {
     const bodyElement = document.body;
