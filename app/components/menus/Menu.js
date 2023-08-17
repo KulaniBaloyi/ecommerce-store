@@ -45,9 +45,6 @@ if(!menu) return null
         <div className="fixed inset-0 bg-neutral-950/90 backdrop-blur-md flex md:hidden justify-end z-[999]">
             <div className="border-r shadow-sm shadow-neutral-800 bg-white w-full sm:w-3/5  flex flex-col">
                 <header className=" px-5 h-[10%] flex justify-between items-center border-b ">
-                    
-           
-
                 <div onClick={()=>handleClick()} className="cursor-pointer">
                   <div className="flex items-center gap-2 flex-1 scale-75">
                       <div className={`text-white font-semibold italic grid place-content-center bg-emerald-500 rounded-lg aspect-square h-12`}>
