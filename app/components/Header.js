@@ -60,7 +60,6 @@ const Header = () => {
     if(!isMounted)return null
   return (
     <>
-    
     <header className={`${isScrolled&&'bg-white/95 text-black border-b shadow-sm'} fixed bg-transparent left-0 right-0 top-0 z-[99]  p-5 flex justify-between items-center`}>
       {/**menu--icon */}
       <svg onClick={()=>{handleOpenMenu()}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 cursor-pointer  flex md:hidden">

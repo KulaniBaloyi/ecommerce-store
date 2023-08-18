@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import useMenu from "@/app/actions/use-menu"
-const Menu = () => {
 
+const Menu = () => {
     const closeMenu = useMenu((state)=>state.onClose)
     const [isMounted,setIsMounted] = useState(false)
     const router = useRouter()
@@ -11,7 +11,6 @@ const Menu = () => {
       closeMenu()
      router.push(`/`)
     }
-
     const handleSignIn = ()=>{
       closeMenu()
      router.push(`/login`)
