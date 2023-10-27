@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.overlay{
+    background-color: #ffff;
+    background-image: url(https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2019/06/product17-free-img.jpg);
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 1;
+}
