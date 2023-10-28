@@ -1,24 +1,15 @@
-import React from 'react'
+import ProductCard from "./ProductCard"
 
 const Trending = () => {
     return (
         <section className='min-h-screen flex flex-col px-10 py-32 w-[95%] mx-auto'>
-                <h1 className='text-center font-semibold text-4xl leading-[1.3em] text-[#111111]'>Trending</h1>
+                <h1 className='mb-10 text-center font-semibold text-4xl leading-[1.3em] text-[#111111]'>Trending</h1>
             <div className='grid grid-cols-4 gap-5'>
-                <div className='border w-full aspect-square'></div>
-                <div className='border w-full aspect-square'></div>
-                <div className='border w-full aspect-square'></div>
-                <div>
-                <div className='border w-full aspect-square relative'>
-                    <p className='rounded-full absolute -right-3 -top-3 bg-[#8bc34a] aspect-square h-10 grid place-content-center text-sm'>Sale!</p>
-                </div>
-                <div className='flex flex-col p-5 gap-2 items-center'>
-                    <h2 className='text-sm text-gray-400 uppercase'>groceries</h2>
-                    <h1 className='font-semibold'>Natural Extracted Edible Oil</h1>
-                    <h3 className='font-semmibold text-sm'>R36.00</h3>
-                </div>
-    
-                </div>
+            <ProductCard alt={"assorted-coffee"} src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/coffee-asorted-400x400.jpg"}/>
+            <ProductCard alt={"assorted-coffee"} src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/orage-juice-kariz-400x400.jpg"}/>
+            <ProductCard alt={"assorted-coffee"} src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/sanitizer-400x400.jpg"}/>
+            <ProductCard alt={"assorted-coffee"} src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/edible-oil-400x400.jpg"}/>
+              
                 
             </div>
         </section>
