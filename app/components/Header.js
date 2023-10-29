@@ -1,15 +1,16 @@
 import Image from "next/image"
+import Link from "next/link"
 
 const Header = () => {
   return (
    <header className='p-5 flex justify-between'>
     <ul className='flex gap-10 items-center'>
-      <h1 className='w-[150px] h-12 relative'>
+      <Link href={"/"} className='w-[150px] h-12 relative'>
         <Image src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2019/06/organic-store-logo5.svg"} fill alt={"logo-heading"} className=""/>
-      </h1>
-      <li>Everything</li>
-      <li>Groceries</li>
-      <li>Juice</li>
+      </Link>
+      <Link href={"/shop"}><li>Everything</li></Link>
+      <Link href={"/shop/groceries"}><li>Groceries</li></Link>
+      <Link href={"/shop/juice"}><li>Juice</li></Link>
     </ul>
     <ul className='flex items-center gap-10'>
       <li>About</li>

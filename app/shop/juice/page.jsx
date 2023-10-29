@@ -1,14 +1,13 @@
 "use client"
 import { usePathname } from 'next/navigation'
-import Pagination from '../components/Pagination'
+import Pagination from '@/app/components/Pagination'
 
-const Shop = () => {
+const Juice = () => {
     const pathname = usePathname()
-   
   return (
-   <div>
+    <div>
     <header className='text-[#777] text-[.92em]'>Home<span className='capitalize'>{pathname}</span></header>
-    <h1 className='text-[#8bc34a] mb-[1em] font-semibold text-[3.25rem] leading-[1.3em]'>Shop</h1>
+    <h1 className='text-[#8bc34a] mb-[1em] font-semibold text-[3.25rem] leading-[1.3em]'>Juice</h1>
     <nav className='flex justify-between'>
         <p className='leading-[1]'>Showing 1–9 of 12 results</p>
         <p className='leading-[1]'>Default sorting</p>
@@ -27,4 +26,4 @@ const Shop = () => {
   )
 }
 
-export default Shop
+export default Juice
