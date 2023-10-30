@@ -1,9 +1,15 @@
-import React from 'react'
+"use client"
+import { useRouter } from "next/navigation"
 
 const layout = ({children}) => {
+  const route = useRouter()
+
+  const changePath=(path)=>{
+    route.push(`/${path}`)
+  }
   return (
-    <div className='grid grid-cols-4 gap-10 w-[90%] m-auto my-10'>
-        <aside className='border-r border-black/20 pr-10 hidden lg:flex  flex-col gap-10'>
+    <div className='grid grid-cols-4 gap-10 w-[95%] m-auto my-10'>
+        <aside className='border-r border-black/20 pr-5 hidden lg:flex  flex-col gap-10'>
             <div className='flex gap-1 h-10'>
                 <div className='flex-1 h-full border rounded-md '>
                     <input type={"text"} placeholder='Search products...' className='pl-2 outline-none full h-full w-full focus:outline-none'/>
@@ -15,11 +21,16 @@ const layout = ({children}) => {
 
                 </div>
             </div>
-            <section>
+            <section className='flex flex-col gap-5'>
                 <h3 className='text-[#111111] text-[1.5rem] leading-[1.5rem] font-semibold'>Filter by price</h3>
+                <ul className='text-[#8bc34a]'>
+                  <li className="cursor-pointer" onClick={()=>changePath("shop/groceries")}>Groceries <span className='text-black'>(9)</span></li>
+                  <li className="cursor-pointer" onClick={()=>changePath("shop/juice")}>Juice <span className='text-black'>(14)</span></li>
+                </ul>
+
             </section>
         </aside>
-        <main className='col-span-4 lg:col-span-3'>{children}</main>
+        <main className='col-span-4 w-[95%] lg:w-full m-auto lg:col-span-3'>{children}</main>
     </div>
   )
 }

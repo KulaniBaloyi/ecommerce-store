@@ -3,12 +3,12 @@ import React from 'react'
 
 const Landing = () => {
   return (
-    <section className='min-h-[100dvh] lg:py-20 lg:px-10'>
-        <div className='grid grid-cols-1 lg:grid-cols-2 h-[500px]  w-full gap-10'>
-            <div className='h-full w-full relative'>
-                <Image fill priority src={"/organic-products-hero.png"} alt={"hero"} className='object-cover'/>
+    <section className='min-h-[100dvh] mb-[1em] lg:py-20 lg:px-10'>
+        <div className='grid grid-cols-1 md:grid-cols-2   w-full gap-10'>
+            <div className='h-full min-h-[300px] aspect-square md:aspect-auto max-h-[500px] w-full relative'>
+                <Image fill priority src={"/organic-products-hero.png"} alt={"hero"} className='object-contain'/>
             </div>
-            <div className='order-1 lg:order-2 h-full w-full px-5 py-10 flex flex-col gap-5 flex-wrap'>
+            <div className='order-first lg:order-2 h-full w-full px-5 py-10 flex flex-col gap-5 flex-wrap'>
                 <p className='relative h-10 w-40'>
                     <Image fill alt="logo-leaf" src={"/logo-leaf-new.png"} className='object-contain'/>
                 </p>
