@@ -11,7 +11,7 @@ const ProductCard = ({src,alt,sale,title}) => {
   }
   return (
     <div onClick={()=>reroute(title)} className="cursor-pointer">
-    <div className='border w-full aspect-square relative '>
+    <div className=' w-full aspect-square relative '>
         <Image fill src={src} alt={alt} className="object-cover"/>
         {sale&&<p className='rounded-full absolute -right-3 -top-3 bg-[#8bc34a] aspect-square h-10 grid place-content-center text-sm'>Sale!</p>}
     </div>

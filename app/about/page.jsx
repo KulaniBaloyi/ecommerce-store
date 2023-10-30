@@ -14,7 +14,24 @@ const About = () => {
                 <Image fill src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2020/01/banner-01.jpg"} className="object-cover" alt="grapes"/>
             </div>        
          </section>
-         <section className="mt-10 bg-[#001524] text-white px-10 py-20"></section>
+         <section className="mt-10 bg-[#001524] text-white text-xl leading-[1.6em] items-center px-10 grid-cols-1 md:grid-cols-2 grid lg:grid-cols-4 gap-5 lg:gap-10 p-5 lg:p-10">
+            <div className="flex flex-col items-center">
+            <h1 className="text-xl font-bold leading-[1.5em] flex break-words">Number speak for themselves</h1>
+            </div>
+            <div className="flex flex-col items-center gap-2">
+            <h1 className="text-5xl font-bold">5,000+</h1>
+            <h1 className="text-xl font-semibold leading-[1.5em] flex break-words">Curated Products</h1>
+            </div>
+            <div className="flex flex-col items-center gap-2">
+            <h1 className="text-5xl font-bold">800+</h1>
+            <h1 className="text-xl font-semibold leading-[1.5em] flex break-words">Curated Products</h1>
+            </div>
+            <div className="flex flex-col items-center gap-2">
+            <h1 className="text-5xl font-bold">80+</h1>
+            <h1 className="text-xl font-semibold leading-[1.5em] flex break-words">Product Categories</h1>
+            </div>
+            
+         </section>
          <section className="bg-white px-10 py-20 grid grid-cols-5 gap-10">
             <div className="bg-[#f8f6f3] border col-span-2 w-full h-[500px] relative overflow-hidden rounded-lg">
                 <Image fill src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/elementor/thumbs/image-01-ok9t8tqfmw86q6a5qjwdw95uon8m0ro8dme893gop4.jpg"} alt={"image"} className="object-contain"/>

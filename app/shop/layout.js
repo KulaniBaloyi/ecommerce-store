@@ -3,7 +3,7 @@ import React from 'react'
 const layout = ({children}) => {
   return (
     <div className='grid grid-cols-4 gap-10 w-[90%] m-auto my-10'>
-        <aside className='border-r pr-10 flex flex-col gap-10'>
+        <aside className='border-r border-black/20 pr-10 hidden lg:flex  flex-col gap-10'>
             <div className='flex gap-1 h-10'>
                 <div className='flex-1 h-full border rounded-md '>
                     <input type={"text"} placeholder='Search products...' className='pl-2 outline-none full h-full w-full focus:outline-none'/>
@@ -19,7 +19,7 @@ const layout = ({children}) => {
                 <h3 className='text-[#111111] text-[1.5rem] leading-[1.5rem] font-semibold'>Filter by price</h3>
             </section>
         </aside>
-        <main className='col-span-3'>{children}</main>
+        <main className='col-span-4 lg:col-span-3'>{children}</main>
     </div>
   )
 }

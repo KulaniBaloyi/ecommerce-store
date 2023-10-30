@@ -14,12 +14,12 @@ const Shop = () => {
         <p className='leading-[1]'>Default sorting</p>
         
     </nav>
-    <div className='my-10 grid grid-cols-3 gap-5 w-full'>
-            <div className='w-full aspect-square rounded-md border'></div>
-            <div className='w-full aspect-square rounded-md border'></div>
-            <div className='w-full aspect-square rounded-md border'></div>
-            <div className='w-full aspect-square rounded-md border'></div>
-            <div className='w-full aspect-square rounded-md border'></div>
+    <div className='my-10 grid grid-cols-2 md:grid-cols-3 gap-5 w-full'>
+    <div className='w-full aspect-square rounded-md border shadow-sm shadow-gray-200'></div>
+    <div className='w-full aspect-square rounded-md border shadow-sm shadow-gray-200'></div>
+    <div className='w-full aspect-square rounded-md border shadow-sm shadow-gray-200'></div>
+    <div className='w-full aspect-square rounded-md border shadow-sm shadow-gray-200'></div>
+    <div className='w-full aspect-square rounded-md border shadow-sm shadow-gray-200'></div>
 
         </div>
         <Pagination/>

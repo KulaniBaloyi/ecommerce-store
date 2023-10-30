@@ -4,8 +4,8 @@ import Image from "next/image"
 const ProductPage = ({params}) => {
   return (
     <div className="w-[90%] mx-auto">
-       <section className="my-20 grid grid-cols-2 gap-10">
-        <div className="w-full h-[500px] rounded-sm relative overflow-hidden shadow-sm shadow-gray-300">
+       <section className="my-20 grid grid-cols-1 lg:grid-cols-2  gap-5 lg:gap-10">
+        <div className="w-full aspect-square lg:h-[500px] rounded-sm relative overflow-hidden shadow-sm shadow-gray-300">
           <Image fill priority src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/orage-juice-kariz.jpg"} alt={"prduct"} className="object-cover"/>
         </div>
         <div className="w-full aspect-square flex flex-col gap-5">
@@ -31,7 +31,7 @@ const ProductPage = ({params}) => {
        </section>
        <section>
         <h1 className="text-[#111111] text-4xl leading-[1.3em] font-bold mt-[1em]">Related Products</h1>
-        <div className="grid grid-cols-4 gap-5 my-10">
+        <div className="grid frid-cols-1 lg:grid-cols-4 gap-5 my-10">
           <ProductCard sale={false} alt={"diabetic cookies"} title={"Diabetic Cookies"} src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/diabetic-cookies-400x400.jpg"}/>
          <ProductCard src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/cashew-butter-500-400x400.jpg"} alt={"cashiew-butter"} title={"cashew butter"} sale={false}/>
          <ProductCard src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/organic-honey-400x400.jpg"} alt={"fresh-organic-honey"} title={"fresh organic honey"} sale={false}/>
