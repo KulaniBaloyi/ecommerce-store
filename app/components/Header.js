@@ -3,18 +3,28 @@ import Link from "next/link"
 
 const Header = () => {
   return (
-   <header className='p-5 flex justify-between'>
-    <ul className='flex gap-10 items-center'>
-      <Link href={"/"} className='w-[150px] h-12 relative'>
+   <header className='p-5 flex justify-between items-center'>
+    <div className="flex gap-2">
+    <Link href={"/"} className='w-[150px] h-12 relative'>
         <Image src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2019/06/organic-store-logo5.svg"} fill alt={"logo-heading"} className=""/>
       </Link>
+      <ul className='hidden lg:flex gap-10 items-center'>
+      
       <Link href={"/shop"}><li>Everything</li></Link>
       <Link href={"/shop/groceries"}><li>Groceries</li></Link>
       <Link href={"/shop/juice"}><li>Juice</li></Link>
     </ul>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="lg:hidden w-5 h-5">
+  <path fillRule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm7 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z" clipRule="evenodd" />
+</svg>
+
+    
+    <div className="hidden lg:flex gap-10 items-center">
+    
     <ul className='flex items-center gap-10'>
-      <li>About</li>
-      <li>Contact</li>
+    <Link href={"/about"}><li>About</li></Link>
+      <Link href={"/contact"}><li>Contact</li></Link>
       <li className="text-[#8bc34a] flex gap-2 items-center relative">
       <p className="bg-[#8bc34a] h-4 text-black text-xs rounded-full aspect-square grid place-content-center p-1 absolute -right-2 -top-2 z-40">0</p>
         <p>R 0.00</p>
@@ -30,6 +40,8 @@ const Header = () => {
 </svg>
 </li>
     </ul>
+    </div>
+
    </header>
   )
 }

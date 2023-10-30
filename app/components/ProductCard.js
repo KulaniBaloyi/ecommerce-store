@@ -1,17 +1,23 @@
-
+"use client"
 import Star from "./icons/Star"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 
-const ProductCard = ({src,alt,sale}) => {
+const ProductCard = ({src,alt,sale,title}) => {
+  const router = useRouter()
+
+  const reroute =(route)=>{
+    router.push(`/product/${route}`)
+  }
   return (
-    <div>
+    <div onClick={()=>reroute(title)} className="cursor-pointer">
     <div className='border w-full aspect-square relative '>
         <Image fill src={src} alt={alt} className="object-cover"/>
         {sale&&<p className='rounded-full absolute -right-3 -top-3 bg-[#8bc34a] aspect-square h-10 grid place-content-center text-sm'>Sale!</p>}
     </div>
     <div className='flex flex-col p-5 gap-2 items-center'>
         <h2 className='text-sm text-gray-400 uppercase'>groceries</h2>
-        <h1 className='font-semibold'>Natural Extracted Edible Oil</h1>
+        <h1 className='font-semibold capitalize'>{title}</h1>
         <div className='flex items-center gap-1'>
             <Star/>
             <Star/>

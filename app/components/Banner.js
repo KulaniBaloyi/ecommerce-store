@@ -2,7 +2,7 @@ import React from 'react'
 
 const Banner = () => {
   return (
-   <section className='bg-[#111111] p-10 grid grid-cols-4 gap-10' >
+   <section className='bg-[#111111] p-5 lg:p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-10' >
  
     <div className='bg-[#333333]/90 w-full aspect-video rounded-sm max-h-[150px] flex gap-5 p-10'>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-8 h-8 text-[#8bc34a]">

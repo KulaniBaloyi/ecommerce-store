@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const Brands = () => {
   return (
-    <section className='grid grid-cols-6 my-10 px-[5%] m-auto bg-[#f8f6f3]'>
+    <section className='grid grid-cols-1 lg:grid-cols-6 my-10 px-[5%] m-auto bg-[#f8f6f3]'>
             <div className='text-[#111111] text-xl leading-[1.5em] font-bold capitalize flex items-center'>Featured brands:</div>
        
         <div className=' w-full h-full relative aspect-video'>

@@ -5,9 +5,9 @@ const CustomerReviews = () => {
   return (
     <section className="w-[90%] m-auto my-10">
         <h1  className='text-center font-semibold text-4xl leading-[1.3em] text-[#111111] mb-10'>Customer reviews</h1>
-        <div className="grid grid-cols-3 gap-10 mt-32" >
+        <div className="grid grid-cols-1  lg:grid-cols-3 gap-5 lg:gap-10 mt-32" >
            <CustomerCard/>
-            <div className="border fruits text-white relative rounded-lg w-full h-[120%] self-end flex flex-col justify-around p-10 shadow-sm shadow-gray-200">
+            <div className="border fruits text-white relative rounded-lg w-full aspect-video lg:h-[120%] self-end flex flex-col justify-around p-10 shadow-sm shadow-gray-200">
               <Image fill alt="fruits" className="object-cover -z-10" src={"/fruit.jpg"}/>
               <p className="bg-neutral-900/60 absolute inset-0 z-20"></p>
                 <div className="flex flex-col gap-2 z-30">
