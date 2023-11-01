@@ -2,7 +2,7 @@ import ProductCard from "./ProductCard"
 
 const Trending = () => {
     return (
-        <section className='min-h-screen flex flex-col px-10 py-32 w-[95%] mx-auto'>
+        <section className='min-h-screen flex flex-col py-32 w-[95%] mx-auto'>
                 <h1 className='mb-10 text-center font-semibold text-4xl leading-[1.3em] text-[#111111]'>Trending</h1>
             <div className='grid grid-cols-1 lg:grid-cols-4 gap-5'>
             <ProductCard title={"assorted coffee"} alt={"assorted-coffee"} src={"https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/coffee-asorted-400x400.jpg"}/>

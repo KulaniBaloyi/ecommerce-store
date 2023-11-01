@@ -3,7 +3,7 @@ import CategoryCard from "./CategoryCard"
 
 const Categories = () => {
   return (
-    <section className="px-10 py-32 bg-[#f8f6f3] relative">
+    <section className="w-[95%] py-32 bg-[#f8f6f3] relative">
         <p className="absolute w-32 h-20 right-1/2 -top-[2rem]">
             <Image src={"/basil-leaf.png"} alt={"basil-leaf"} fill className=""/>
         </p>
