@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation"
 
-const layout = ({children}) => {
+const ShopLayout = ({children}) => {
   const route = useRouter()
 
   const changePath=(path)=>{
@@ -35,4 +35,4 @@ const layout = ({children}) => {
   )
 }
 
-export default layout
+export default ShopLayout
