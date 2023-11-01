@@ -19,7 +19,6 @@ export default async function Home() {
       <Trending/>
       <CustomerReviews/>
       <Brands/>
-      
     </main>
   )
 }
