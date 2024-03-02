@@ -2,3 +2,71 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    color:#27292a;
+    
+}
+
+.custom-radio{
+    
+}
+.custom__radio input:checked + .custom-radio{
+    background-color: red;
+}
+
+.test{
+    background-color: red;
+}
+.gallery__main{
+   clip-path: polygon(48px 0%, 100% 0, 100% calc(100% - 48px), calc(100% - 48px) 100%, 0 100%, 0% 48px)
+}
+.hero{
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 64px), calc(100% - 64px) 100%, 0 100%);
+}
+
+.fancy__button{
+    clip-path: polygon(18px 0%, 100% 0%, calc(100% - 18px) 100%, 0% 100%);
+    
+}
+
+.heading{
+   font-family: 'FF DIN Pro Condensed', sans-serif;
+}
+
+.tile__inner {
+    padding: 48px 24px 20px;
+    clip-path: polygon(48px 0%, 100% 0, 100% calc(100% - 48px), calc(100% - 48px) 100%, 0 100%, 0% 48px);
+    height: 100%;
+    background-color: var(--color-background);
+}
+.section__heading{
+    background-color: rgba(39,41,42,0.1)
+}
+
+.footer__inner {
+   
+    font-size: .875rem;
+    color:#27292a;
+    clip-path: polygon(48px 0%, 100% 0, 100% 100%, 0 100%, 0% 48px);
+    background-color: #fff;
+    overflow:hidden;
+
+}
+
+.marque__label{
+    font-family: 'FF DIN Pro Condensed', sans-serif;
+    font-size: 7.5rem;
+    line-height: 1.2;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.card:nth-child(4n) {
+    border-color: yellow;
+  }
+  .card:first-child {
+    border-color: teal;
+  }
