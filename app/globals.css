@@ -4,12 +4,11 @@
 
 body{
     color:#27292a;
+    background-color: rgba(39,41,42,0.1)
     
 }
 
-.custom-radio{
-    
-}
+
 .custom__radio input:checked + .custom-radio{
     background-color: red;
 }
@@ -39,9 +38,7 @@ body{
     height: 100%;
     background-color: var(--color-background);
 }
-.section__heading{
-    background-color: rgba(39,41,42,0.1)
-}
+
 
 .footer__inner {
    
