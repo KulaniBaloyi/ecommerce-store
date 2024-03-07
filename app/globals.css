@@ -13,13 +13,16 @@ body{
     background-color: red;
 }
 
-.test{
-    background-color: red;
-}
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
 .gallery__main{
    clip-path: polygon(48px 0%, 100% 0, 100% calc(100% - 48px), calc(100% - 48px) 100%, 0 100%, 0% 48px)
 }
-.hero{
+.landing{
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 64px), calc(100% - 64px) 100%, 0 100%);
 }
 

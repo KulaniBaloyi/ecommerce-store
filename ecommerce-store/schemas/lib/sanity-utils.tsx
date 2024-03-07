@@ -46,25 +46,33 @@ export const client: SanityClient = createClient({
   dataset: process.env.SANITY_DATASET,
   title: process.env.SANITY_TITLE,
   apiVersion: "2023-11-21",
-  token:process.env.SANITY_TOKEN,
+  token:process.env.SANITY_TOKEN_2,
   useCdn: false,
 });
 
 //first we create a user
-export async function createUser(userData:User):Promise<any> {
+export async function createUser(userData: User): Promise<any> {
   const { name, email } = userData;
 
   // Add any additional validation or data preparation here
 
-  // Create a new user document
-  const newUser = await client.create({
-    _type: "user",
-    name,
-    email,
-    createdAt: new Date().toISOString(),
-  });
+  try {
+    // Create a new user document
+    const newUser = await client.create({
+      _type: "user",
+      name,
+      email,
+      createdAt: new Date().toISOString(),
+    });
 
-  return newUser;
+    return newUser;
+  } catch (error) {
+    console.error("Error creating user:", error);
+    // Handle the error gracefully, e.g., return an error object or throw a specific error
+
+    // Example: Throw a custom error with more information
+    throw new Error(`Failed to create user: ${error.message}`);
+  }
 }
 
 // Function to get orders by email and sort by the latest
@@ -101,6 +109,7 @@ export async function createOrder(email:string,cart:Cart):Promise<Order> {
       
         _type: 'order',
         name,
+        email,
         qty: quantity,
         price,
         paid: true,
@@ -153,3 +162,13 @@ export async function getProducts(): Promise<Product[]> {
     }`
   );
 }
+
+export async function getVideos(): Promise<Product[]> {
+  return client.fetch(
+    groq`*[_type == "video"]{
+      name,
+      "video":video.asset->url
+    }`
+  );
+}
+
