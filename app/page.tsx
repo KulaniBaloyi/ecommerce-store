@@ -9,10 +9,7 @@ import Button from "./components/Button";
 export default async function Home() {
   const products = await getProducts();
   const bgVideo = await getVideos()
- //const user = await createUser({name:"Kulani Baloyi",email:"kulani17.kb@gmail.com"})
- //const order = await createOrder("kulani17.kb@gmail.com",[{name:"dog",price:7000, quantity:4},{name:"coca cola",price:16.5, quantity:12}])
- //const getOrders= await getOrdersByEmail("kulani17.kb@gmail.com")
-//console.log("orders by email:  ", getOrders)
+
   return (
     <main className="  min-h-screen ">
       {bgVideo.map((bgV)=>
