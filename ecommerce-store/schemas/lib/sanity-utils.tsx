@@ -31,7 +31,6 @@ type Order= {
 type CartItem= {
   _key: string; // Inferred type based on Sanity document schema
   productId: string; // Assuming you have a "productId" reference to another document
-  name: string;
   quantity: number;
   price: number;
   description:string;
@@ -93,45 +92,74 @@ export async function getOrdersByEmail(email:string):Promise<Order[]> {
   }
 }
 
-export async function createOrder(email:string,cart:Cart):Promise<Order> {
-  console.log(email,cart);
+export async function createOrder(email, cart) {
+  // Find the user by email (replace with your user finding logic)
+  const user = await findUserByEmail(email);
+
+  if (!user) {
+    throw new Error('User with email not found');
+  }
+
+  // Construct order data based on schema
+  const orderData = {
+    _type: 'order',
+    customer: { _ref: user._id }, // Use user's _id reference
+    items: cart.map((item) => ({
+      _key: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+      product: { _ref: item._id }, // Product reference
+      quantity: item.quantity,
+    })),
+    //subtotal: calculateSubtotal(cart), // Implement subtotal calculation logic
+    subtotal:2500,
+    //tax: 0.15, // Fixed tax rate (modify as needed)
+    shipping: 35, // Fixed shipping cost (modify as needed)
+   total:4560,
+    //total: calculateTotal(cart), // Implement total calculation logic including tax and shipping
+    status: 'waiting_for_payment', // Initial order status
+    paid: false,
+    delivered: false,
+    tax:.15,
+    orderNumber:"last-dance",
+    createdAt: new Date().toISOString(),
+  };
+
   try {
-    // Create an array to store the promises for creating each order
-    const orderCreationPromises: Promise<Order>[] = [];
+    const createdOrder = await client.create(orderData);
+    console.log('Order created successfully:', createdOrder);
+   // Update user document to add order reference
+   console.log('User ID:', user._id);
+   console.log('Orders array (before patch):', user.orders); // Assuming you have user data with orders
 
-    // Iterate over the orderDataArray and create a promise for each order
-    cart.forEach((orderData:CartItem) => {
-      // Extract order data
-      const { name, quantity, price} = orderData;
-
-      // Create a promise for creating each order
-      const orderCreationPromise = client.create({
-      
-        _type: 'order',
-        name,
-        email,
-        qty: quantity,
-        price,
-        paid: true,
-        delivered: false,
-   
-        createdAt: new Date().toISOString(),
-      });
-
-      // Add the promise to the array
-      orderCreationPromises.push(orderCreationPromise);
-    });
-
-    // Wait for all order creation promises to resolve
-    const createdOrders = await Promise.all(orderCreationPromises);
-
-    // Return the created orders
-    return createdOrders;
-  } catch (error:any) {
-    // Handle errors appropriately
+  // Update user document with the created order reference
+  const patch = await client.patch(user._id)
+      .setIfMissing({  // Ensure an empty object for 'orders' if missing
+          orders: []
+      })
+      .set({ // Use an object here to specify the property to update
+        orders: [...user.orders, { _ref: createdOrder._id }]
+    })
+    .commit();
+     console.log('Patch object:', patch); // Log the constructed patch object
+    return createdOrder;
+  } catch (error) {
     console.error('Error creating order:', error.message);
     throw new Error('Failed to create order');
   }
+}
+function calculateSubtotal(cart) {
+  // Implement logic to calculate subtotal based on cart items
+  // This is a placeholder, replace with your actual calculation
+  let subtotal = 0;
+  cart.forEach((item) => {
+    subtotal += item.quantity * item.price; // Assuming 'price' exists on cart item
+  });
+  return subtotal;
+}
+
+function calculateTotal(cart) {
+  // Implement logic to calculate total including tax and shipping
+  // This is a placeholder, replace with your actual calculation
+  return calculateSubtotal(cart) * (1 + 0.15) + 35;
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
@@ -172,3 +200,15 @@ export async function getVideos(): Promise<Product[]> {
   );
 }
 
+async function findUserByEmail(email) {
+  const query = `*[_type == "user" && email == $email][0]`; // Fetch user with matching email
+  const params = { email }; // Define parameter for email
+
+  try {
+    const user = await client.fetch(query, params);
+    return user; // Return user object or null if not found
+  } catch (error) {
+    console.error('Error finding user:', error.message);
+    return null; // Indicate error or user not found
+  }
+}

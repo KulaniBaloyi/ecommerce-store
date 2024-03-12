@@ -20,7 +20,7 @@ const user = {
       of: [
         {
           type: "reference",
-          to: [{ type: "order" }], // Reference to the "order" document type
+          to: [{ type: "order" }], 
         },
       ],
     },

@@ -3,6 +3,7 @@ import VideoCard from "./VideoCard"
 
 
 const RecentVideos = () => {
+
   return (
     <section className=" flex flex-col gap-5 py-20 mx-auto ">
         <div className="flex justify-between items-center">
@@ -10,9 +11,9 @@ const RecentVideos = () => {
             <Button text={"visit channel"} redirect={"https://www.youtube.com/channel/UCgGxpY1-vsqlA0JqzPSDpsA"}/>
         </div>
         <div className="grid grid-cols-3 gap-16 ">
-            <VideoCard/>
-            <VideoCard/>
-            <VideoCard/>
+            <VideoCard img_src={"https://img.youtube.com/vi/wj06CJ5Ag40/maxresdefault.jpg"} link={"https://www.youtube.com/watch?v=wj06CJ5Ag40"} title={"Emma Stone Says She Was Shocked After Winning the Oscar - Full Oscars Backstage Speech"}/>
+            <VideoCard img_src={"https://img.youtube.com/vi/wj06CJ5Ag40/maxresdefault.jpg"} link={"https://www.youtube.com/watch?v=wj06CJ5Ag40"} title={"Emma Stone Says She Was Shocked After Winning the Oscar - Full Oscars Backstage Speech"}/>
+            <VideoCard img_src={"https://img.youtube.com/vi/wj06CJ5Ag40/maxresdefault.jpg"} link={"https://www.youtube.com/watch?v=wj06CJ5Ag40"} title={"Emma Stone Says She Was Shocked After Winning the Oscar - Full Oscars Backstage Speech"}/>
         </div>
     </section>
   )

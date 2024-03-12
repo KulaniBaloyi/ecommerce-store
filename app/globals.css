@@ -19,6 +19,17 @@ video {
     object-fit: cover;
   }
 
+  .__iou{
+    background-image: url(https://imgproxy.fourthwall.com/lYhAOgg9DffqzASYwYXjKwNZqE8jl8KtfgZAqxigjoA/w:1920/sm:1/aHR0cHM6Ly9zdG9y/YWdlLmdvb2dsZWFw/aXMuY29tL2Nkbi5m/b3VydGh3YWxsLmNv/bS9vZmZlci9zaF81/YTEyZTQ2MC0xZTI3/LTQ2ODAtYjIwNi03/NzA3NDI0MjcwM2Ev/MmUxZjA3OGMtYWZl/NC00ZDkyLWE2ZDAt/ZWJmY2JkZmZlZjgx/LmpwZWc.webp);
+    background-position: 91.0714% 22.4026%;
+    display: contents;
+
+  }
+  img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
 .gallery__main{
    clip-path: polygon(48px 0%, 100% 0, 100% calc(100% - 48px), calc(100% - 48px) 100%, 0 100%, 0% 48px)
 }
@@ -33,6 +44,10 @@ video {
 
 .heading{
    font-family: 'FF DIN Pro Condensed', sans-serif;
+}
+
+footer{
+    clip-path: polygon(48px 0%, 100% 0, 100% 100%, 0 100%, 0% 48px)
 }
 
 .tile__inner {

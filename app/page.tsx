@@ -9,6 +9,12 @@ import Button from "./components/Button";
 export default async function Home() {
   const products = await getProducts();
   const bgVideo = await getVideos()
+  const cartData = [
+    { _id: "9c747825-5774-46f4-aabf-0074968b34d5", quantity: 9 },
+    { _id: "a67242ec-3fcc-47a0-a4ec-9d5570e11e0b", quantity: 4 },
+  ];
+
+  const order = await createOrder("kulani17@yahoo.com",cartData)
 
   return (
     <main className="  min-h-screen ">
