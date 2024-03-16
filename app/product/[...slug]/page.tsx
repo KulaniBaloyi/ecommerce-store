@@ -1,8 +1,8 @@
 import Image from "next/image";
 import YouMayAlsoLike from "@/app/components/YouMayAlsoLike";
 import { getProductBySlug } from "@/ecommerce-store/schemas/lib/sanity-utils";
-import AddToCartButton from "@/app/components/AddToCartButton";
-import Options from "@/app/components/Options";
+import AddToCart from "@/app/components/AddToCart";
+
 
 interface ProductProps {
     params: { id: string; slug: string }; // Include slug in the interface
@@ -85,10 +85,10 @@ const  Page: React.FC<ProductProps> = async({params}) => {
              </div>
            </section>
            <section className="flex gap-5 border-t pt-10 mb-10">
-       <Options/>
+      
               
             
-      <AddToCartButton/>
+      <AddToCart prodDetail={prodDetail}/>
            </section>
            <section className="hidden">
              <ul className="flex flex-col gap-5 text-lg font-[500] leading-[1.5] text-[#27292a]">

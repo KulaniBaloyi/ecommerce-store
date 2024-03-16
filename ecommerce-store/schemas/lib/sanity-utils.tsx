@@ -79,7 +79,10 @@ export async function getOrdersByEmail(email:string):Promise<Order[]> {
   try {
     // Query orders from Sanity with a GROQ query
     const orders = await client.fetch(
-      `*[_type == 'order' && email == $email] | order(createdAt desc)`,
+      `*[_type == "user" && email == "kulani17@yahoo.com"]{
+        _id, name,email,
+        "orders": *[_type == "order" && references(^._id)].items
+      }`,
       { email }
     );
 
@@ -92,7 +95,7 @@ export async function getOrdersByEmail(email:string):Promise<Order[]> {
   }
 }
 
-export async function createOrder(email, cart) {
+export async function createOrder(email, cart,subtotal) {
   // Find the user by email (replace with your user finding logic)
   const user = await findUserByEmail(email);
 
@@ -109,12 +112,12 @@ export async function createOrder(email, cart) {
       product: { _ref: item._id }, // Product reference
       quantity: item.quantity,
     })),
-    //subtotal: calculateSubtotal(cart), // Implement subtotal calculation logic
-    subtotal:2500,
-    //tax: 0.15, // Fixed tax rate (modify as needed)
+   
+    subtotal:subtotal   ,
+   
     shipping: 35, // Fixed shipping cost (modify as needed)
-   total:4560,
-    //total: calculateTotal(cart), // Implement total calculation logic including tax and shipping
+   total:(subtotal*1.15)+35,
+   
     status: 'waiting_for_payment', // Initial order status
     paid: false,
     delivered: false,
@@ -125,10 +128,10 @@ export async function createOrder(email, cart) {
 
   try {
     const createdOrder = await client.create(orderData);
-    console.log('Order created successfully:', createdOrder);
+   // console.log('Order created successfully:', createdOrder);
    // Update user document to add order reference
-   console.log('User ID:', user._id);
-   console.log('Orders array (before patch):', user.orders); // Assuming you have user data with orders
+   //console.log('User ID:', user._id);
+   //console.log('Orders array (before patch):', user.orders); // Assuming you have user data with orders
 
   // Update user document with the created order reference
   const patch = await client.patch(user._id)
@@ -139,7 +142,7 @@ export async function createOrder(email, cart) {
         orders: [...user.orders, { _ref: createdOrder._id }]
     })
     .commit();
-     console.log('Patch object:', patch); // Log the constructed patch object
+     //console.log('Patch object:', patch); // Log the constructed patch object
     return createdOrder;
   } catch (error) {
     console.error('Error creating order:', error.message);

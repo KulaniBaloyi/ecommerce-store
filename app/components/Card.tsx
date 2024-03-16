@@ -15,7 +15,7 @@ type Product = {
 
 const Card = ({name,price,image,slug}:Product) => {
   const route = useRouter()
-  console.log(image)
+  
   return (
     <div onClick={()=>route.push(`/product/${slug.current}`)} className='card hover:scale-105 duration-500 transition-all ease-in-out pt-12 px-6 pb-5 gallery__main bg-white w-full cursor-pointer rounded-md relative overflow-hidden '>
       <div className='  aspect-square grid place-content-center uppercase  italic relative'>
