@@ -23,7 +23,7 @@ const CartPage = () => {
   return (
     <>
       <section className="px-[5%] my-20 bg-white py-10 min-h-dvh">
-      {cartItems.length>0?<div>{totalItems>1? <h1 className="text-[1.5rem] leading-[1.5] italic text-[#27292a] heading tracking-[-0.02em] font-[900]">{totalItems} items in your cart for R{cartTotal}</h1>: <h1 className="text-[1.5rem] leading-[1.5] italic text-[#27292a] heading tracking-[-0.02em] font-[900]">{totalItems} item in your cart for R{cartTotal}</h1>}
+      {cartItems.length>0?<div key={"90_78"}>{totalItems>1? <h1 className="text-[1.5rem] leading-[1.5] italic text-[#27292a] heading tracking-[-0.02em] font-[900]">{totalItems} items in your cart for R{cartTotal}</h1>: <h1 className="text-[1.5rem] leading-[1.5] italic text-[#27292a] heading tracking-[-0.02em] font-[900]">{totalItems} item in your cart for R{cartTotal}</h1>}
              
               <div className="flex gap-10">
               <div className="flex-[.7] ">
