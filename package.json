@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe",
+    "stripe:listen": "stripe listen --forward-to localhost://3000/api/stripe",
     "stripe:trigger":"stripe trigger payment_intent.succeed"
   },
   "dependencies": {

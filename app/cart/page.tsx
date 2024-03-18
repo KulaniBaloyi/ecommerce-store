@@ -2,14 +2,11 @@
 
 import Link from "next/link";
 import Button from "../components/Button";
-import CartItem from "../components/CartItem";
-import HeroButton from "../components/hero-button";
 import useCartStore from "../lib/cart-store";
 import Image from "next/image";
-import AddToCart from "../components/AddToCart";
 
-//import Button from '../components/Button';
-//import YouMayAlsoLike from '../components/YouMayAlsoLike';
+import { loadStripe } from "@stripe/stripe-js";
+
 
 
 const CartPage = () => {
@@ -19,7 +16,38 @@ const CartPage = () => {
   const addToCart = useCartStore((state)=>state.addToCart)
   const removeFromCart = useCartStore((state)=>state.removeFromCart)
   console.log("cartItems: ", cartItems)
+  const stripePromise = loadStripe(
+   // process.env.STRIPE_PUBLISHABLE_KEY
+   `${ process.env.STRIPE_PUBLISHABLE_KEY}`
+  );
+  console.log("API_KY: ", stripePromise)
+  const createCheckout = async () => {
+  
+      const stripe = await stripePromise;
 
+      try{
+        const response = await fetch("http://localhost:3000/api/chechout", {
+          method: "POST",
+          headers: { "Content-Type": "appication/json" },
+          body: JSON.stringify({
+            items: cartItems,
+            //email: session?.user?.email,
+            email:"kulani17@yahoo.com"
+          }),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          stripe?.redirectToCheckout({ sessionId: data.id });
+        }
+       else {
+        
+        // toast.error("Please sign in to make Checkout");
+       }
+      
+      }catch(err:any){
+
+      }
+    }
   return (
     <>
       <section className="px-[5%] my-20 bg-white py-10 min-h-dvh">
@@ -93,8 +121,13 @@ const CartPage = () => {
                   <div className=" font-bold flex justify-between mb-2">
                     <h2>Subtotal</h2>
                     <h2>{cartTotal}</h2>
-                  </div>
-                  <Link href={'/checkout'} className={`block hover:opacity-90 duration-150 transition-all self-center bg-[#e5202b] text-white border fancy__button py-3 px-10 uppercase text-[1rem] text-center leading-[1.5] font-bold `}>Checkout</Link>
+                  </div> <button
+                  onClick={createCheckout}
+                  className="w-52 h-10 bg-primeColor text-white hover:bg-black duration-300"
+                >
+                  Proceed to Checkout
+                </button>
+                  {/* <Link href={'/checkout'} className={`block hover:opacity-90 duration-150 transition-all self-center bg-[#e5202b] text-white border fancy__button py-3 px-10 uppercase text-[1rem] text-center leading-[1.5] font-bold `}>Checkout</Link> */}
                 </div>
               </div>
      

@@ -1,4 +1,5 @@
 import { createClient, groq } from "next-sanity";
+import imageUrlBuilder from "@sanity/image-url";
 
 // Type definitions for the Sanity client and query results
 type SanityClient = ReturnType<typeof createClient>;
@@ -45,9 +46,14 @@ export const client: SanityClient = createClient({
   dataset: process.env.SANITY_DATASET,
   title: process.env.SANITY_TITLE,
   apiVersion: "2023-11-21",
-  token:process.env.SANITY_TOKEN_2,
+  token:process.env.SANITY_TOKEN,
   useCdn: false,
 });
+const builder = imageUrlBuilder(client);
+
+export const urlFor = (source: any) => {
+  return builder.image(source);
+};
 
 //first we create a user
 export async function createUser(userData: User): Promise<any> {
