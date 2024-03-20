@@ -35,7 +35,7 @@ const  Page: React.FC<ProductProps> = async({params}) => {
   return (
     <>
    
-        <div className='flex gap-10 w-full min-h-[90dvh] mt-20 mb-20 px-10 m-auto'>
+        <div className='flex gap-10 w-full min-h-[90dvh] mt-24 mb-20 px-10 m-auto'>
         <div className='flex-[.6] max-h-full  gallery__main overflow-hidden w-full h-full aspect-square text-white text-xl '>
         {image&&<Image src={`${image&&image}`} alt={name} className='object-cover'  objectPosition="center" fill/>  } 
         </div>

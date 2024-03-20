@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Stripe } from "stripe";
-import { client } from "@/lib/sanityClient";
+import { client } from "@/ecommerce-store/schemas/lib/sanity-utils";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2023-10-16",

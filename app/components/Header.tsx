@@ -3,13 +3,16 @@ import Link from "next/link";
 import useCartStore from "../lib/cart-store";
 
 import { useState, useEffect } from "react";
-import { useRouter} from "next/navigation";
+import { useRouter,usePathname} from "next/navigation";
+
 
 const Header = () => {
   const [headerRef, setHeaderRef] = useState(null);
   const [isSticky, setIsSticky] = useState(false);
   const route = useRouter()
+  const pathname = usePathname()
   const cartItems = useCartStore((state) => state.cart);
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,7 +27,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed bg-transparent top-0 left-0 right-0 z-[99999999] transition-all duration-500 ease-in-out flex justify-between items-center p-5  ${
+      className={`${pathname!=="/"?"bg-white":""} fixed bg-transparent top-0 left-0 right-0 z-[99999999] transition-all duration-500 ease-in-out flex justify-between items-center p-5  ${
         isSticky ? "bg-white " : "" // Custom background color class
       }`}
       ref={setHeaderRef}

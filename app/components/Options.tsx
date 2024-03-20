@@ -6,7 +6,7 @@ const Options = ({quantity,handleChange}) => {
     <div className="w-24 min-w-16 h-14 text-[1rem] leading-[1.5] border-2">
     <select  value={quantity}
         onChange={handleChange} className=" px-2 text-lg font-[500] border-2 border-gray-300/80 bg-inherit w-full h-full cursor-pointer leading-[1.5] text-[#27292a] ">
-      <option  selected value={1}>1</option>
+      <option value={1}>1</option>
       <option value={2}>2</option>
       <option value={3}>3</option>
       <option value={4}>4</option>

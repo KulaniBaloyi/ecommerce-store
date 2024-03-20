@@ -209,7 +209,7 @@ export async function getVideos(): Promise<Product[]> {
   );
 }
 
-async function findUserByEmail(email) {
+export async function findUserByEmail(email) {
   const query = `*[_type == "user" && email == $email][0]`; // Fetch user with matching email
   const params = { email }; // Define parameter for email
 

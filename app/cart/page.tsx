@@ -15,20 +15,22 @@ const CartPage = () => {
   const totalItems = useCartStore((state)=>state.totalItems)
   const addToCart = useCartStore((state)=>state.addToCart)
   const removeFromCart = useCartStore((state)=>state.removeFromCart)
-  console.log("cartItems: ", cartItems)
+  //console.log("cartItems: ", cartItems)
   const stripePromise = loadStripe(
    // process.env.STRIPE_PUBLISHABLE_KEY
    `${ process.env.STRIPE_PUBLISHABLE_KEY}`
   );
-  console.log("API_KY: ", stripePromise)
+  //console.log("API_KY: ", stripePromise)
   const createCheckout = async () => {
   
       const stripe = await stripePromise;
 
       try{
-        const response = await fetch("http://localhost:3000/api/chechout", {
+        const response = await fetch("http://localhost:3000/api/checkout", {
           method: "POST",
-          headers: { "Content-Type": "appication/json" },
+          headers: 
+          { "Content-Type": "appication/json",
+          "Cache-Control": "no-cache" },
           body: JSON.stringify({
             items: cartItems,
             //email: session?.user?.email,
@@ -37,7 +39,9 @@ const CartPage = () => {
         });
         const data = await response.json();
         if (response.ok) {
-          stripe?.redirectToCheckout({ sessionId: data.id });
+          window.location.href = data.url
+        //console.log("sessionID format data: ",data.id )
+          //stripe?.redirectToCheckout({ sessionId: `${data?.id}`});
         }
        else {
         
@@ -50,7 +54,7 @@ const CartPage = () => {
     }
   return (
     <>
-      <section className="px-[5%] my-20 bg-white py-10 min-h-dvh">
+      <section className="px-[5%] my-16 bg-white py-10 min-h-dvh">
       {cartItems.length>0?<div key={"90_78"}>{totalItems>1? <h1 className="text-[1.5rem] leading-[1.5] italic text-[#27292a] heading tracking-[-0.02em] font-[900]">{totalItems} items in your cart for R{cartTotal}</h1>: <h1 className="text-[1.5rem] leading-[1.5] italic text-[#27292a] heading tracking-[-0.02em] font-[900]">{totalItems} item in your cart for R{cartTotal}</h1>}
              
               <div className="flex gap-10">
@@ -123,7 +127,7 @@ const CartPage = () => {
                     <h2>{cartTotal}</h2>
                   </div> <button
                   onClick={createCheckout}
-                  className="w-52 h-10 bg-primeColor text-white hover:bg-black duration-300"
+                 className={`block hover:opacity-90 duration-150 transition-all self-center bg-[#e5202b] text-white border fancy__button py-3 px-10 uppercase text-[1rem] text-center leading-[1.5] font-bold `}
                 >
                   Proceed to Checkout
                 </button>

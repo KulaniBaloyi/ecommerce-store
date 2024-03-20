@@ -13,17 +13,17 @@ const user = {
       title: "Email",
       type: "string",
     },
-    {
-      name: "orders",
-      title: "Orders",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "order" }], 
-        },
-      ],
-    },
+    // {
+    //   name: "orders",
+    //   title: "Orders",
+    //   type: "array",
+    //   of: [
+    //     {
+    //       type: "reference",
+    //       to: [{ type: "order" }], 
+    //     },
+    //   ],
+    // },
     {
       name: "createdAt",
       title: "Created At",

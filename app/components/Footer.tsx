@@ -6,7 +6,7 @@ const Footer = () => {
     <div className='marque__label'>
     Footer
     </div>
-    
+    <p>Copyright {new Date().getFullYear()}</p>
     
     
 
