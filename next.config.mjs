@@ -1,8 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['cdn.sanity.io','img.youtube.com','youtube.com'],
+      remotePatterns: [
+        // Replace with the actual patterns you want to match
+        {
+          protocol: 'https',
+          hostname: 'cdn.sanity.io',
+        },
+        {
+          protocol: 'https', // Allow both http and https
+          hostname: 'img.youtube.com',
+        },
+      ],
     },
-};
-
-export default nextConfig;
+  };
+  
+  export default nextConfig;

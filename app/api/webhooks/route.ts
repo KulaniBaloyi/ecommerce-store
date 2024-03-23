@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
-import { Stripe } from "stripe";
 import { client } from "@/ecommerce-store/schemas/lib/sanity-utils";
+import { NextResponse,NextRequest } from "next/server";
+import { Stripe } from "stripe";
+import { groq } from "next-sanity";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2023-10-16",
@@ -8,53 +9,52 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
-const fullfillOrder = async (session: any) => {
+
+export const POST = async (req: NextRequest) => {
   try {
-    await client.create({
-      _type: "order",
-      status: session.status,
-      message: "Payment done",
-      description: session?.description || "Test message from orders",
-      title: session?.id || "Orders",
-      method: session.confirmation_method,
-      amount: session.amount / 100,
-      // lineItem: lineItems,
-    });
-  } catch (error: any) {
-    console.log("error", error?.message);
-  }
+    const rawBody = await req.text()
+    const signature = req.headers.get("Stripe-Signature") as string
 
-  console.log("session", session);
-  NextResponse.json({
-    message: "Payment done",
-    status: true,
-    method: session.status,
-    data: session,
-  });
-};
+    const event = stripe.webhooks.constructEvent(
+      rawBody,
+      signature,
+     webhookSecret
+    )
 
-export async function POST(req: Request) {
-  const payload = await req.text();
-  const signature = req.headers.get("stripe-signature");
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object
 
-  let event: Stripe.Event | null = null;
-  try {
-    event = stripe.webhooks.constructEvent(payload, signature!, webhookSecret);
+      // const customerInfo = {
+      //   clerkId: session?.client_reference_id,
+      //   name: session?.customer_details?.name,
+      //   email: session?.customer_details?.email,
+      // }
 
-    if (event?.type === "payment_intent.succeeded") {
-      const session = event.data.object;
-      return fullfillOrder(session)
-        .then(() => NextResponse.json({ status: 200 }))
-        .catch((err) =>
-          NextResponse.json({ error: err?.message }, { status: 500 })
-        );
+      // const shippingAddress = {
+      //   street: session?.shipping_details?.address?.line1,
+      //   city: session?.shipping_details?.address?.city,
+      //   state: session?.shipping_details?.address?.state,
+      //   postalCode: session?.shipping_details?.address?.postal_code,
+      //   country: session?.shipping_details?.address?.country,
+      // }
+
+      const retrieveSession = await stripe.checkout.sessions.retrieve(
+        session.id,
+        { expand: ["line_items"]}
+      )
+      console.log("expanded_session: ", retrieveSession)
+      //This is where id make updates to my database or CMS
+
+   
+
+  
+
+
     }
+
+    return new NextResponse("Order created", { status: 200 })
   } catch (err) {
-    if (err instanceof Error) {
-      console.error(err.message);
-      return NextResponse.json({ message: err.message }, { status: 400 });
-    }
+    console.log("[webhooks_POST]", err)
+    return new NextResponse("Failed to create the order", { status: 500 })
   }
-
-  return NextResponse.json({ received: true });
 }

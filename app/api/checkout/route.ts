@@ -23,6 +23,10 @@ export const POST = async (request: NextRequest) => {
     //destructure request params
     const { items, email } = await reqBody;
 
+    if (!items || !email) {
+      return new NextResponse("Not enough data to checkout", { status: 400 });
+    }
+
     //create a cart array for stripe
     const updatedItems = await items.map((item) => ({
         quantity: item.quantity,

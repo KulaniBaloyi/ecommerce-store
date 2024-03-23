@@ -3,12 +3,13 @@ import Options from "@/app/components/Options";
 import useCartStore from "../lib/cart-store"
 import { useState } from "react";
 
+
+
 const AddToCart = ({prodDetail}) => {
     const addToCart = useCartStore((state) => state.addToCart);
     const cart = useCartStore((state) => state.cart);
-    console.log("cart item detail: ",prodDetail)
-    console.log("cart items array: ",cart)
-    const [quantity, setQuantity] = useState()
+
+    const [quantity, setQuantity] = useState(1)
     const handleChange = (e) => {
       setQuantity(e.target.value)
     }

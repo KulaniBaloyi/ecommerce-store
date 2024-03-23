@@ -5,11 +5,14 @@ import RecentVideos from "./components/RecentVideos";
 import { createOrder, getOrdersByEmail, getProducts,getVideos } from "@/ecommerce-store/schemas/lib/sanity-utils";
 import { createUser } from "@/ecommerce-store/schemas/lib/sanity-utils";
 import Button from "./components/Button";
+import { fullfillOrder } from "@/ecommerce-store/schemas/lib/sanity-utils";
+import { updateOrderPaymentState } from "@/ecommerce-store/schemas/lib/sanity-utils";
+
 
 export default async function Home() {
   const products = await getProducts();
   const bgVideo = await getVideos()
-
+  
   return (
     <main className="">
       {bgVideo.map((bgV)=>

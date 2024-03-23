@@ -34,7 +34,8 @@ const CartPage = () => {
           body: JSON.stringify({
             items: cartItems,
             //email: session?.user?.email,
-            email:"kulani17@yahoo.com"
+            email:"kulani17@yahoo.com",
+            cartTotal:cartTotal
           }),
         });
         const data = await response.json();

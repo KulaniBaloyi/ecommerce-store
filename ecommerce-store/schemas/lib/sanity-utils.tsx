@@ -46,9 +46,11 @@ export const client: SanityClient = createClient({
   dataset: process.env.SANITY_DATASET,
   title: process.env.SANITY_TITLE,
   apiVersion: "2023-11-21",
-  token:process.env.SANITY_TOKEN,
+  token:process.env.SANITY_DEVELOPER_TOKEN,
   useCdn: false,
 });
+
+//console.log("CLIENT EXITS??:", client)
 const builder = imageUrlBuilder(client);
 
 export const urlFor = (source: any) => {
@@ -101,7 +103,7 @@ export async function getOrdersByEmail(email:string):Promise<Order[]> {
   }
 }
 
-export async function createOrder(email, cart,subtotal) {
+export async function createOrder(email, cart,subtotal,orderNumber) {
   // Find the user by email (replace with your user finding logic)
   const user = await findUserByEmail(email);
 
@@ -118,7 +120,6 @@ export async function createOrder(email, cart,subtotal) {
       product: { _ref: item._id }, // Product reference
       quantity: item.quantity,
     })),
-   
     subtotal:subtotal   ,
    
     shipping: 35, // Fixed shipping cost (modify as needed)
@@ -128,7 +129,7 @@ export async function createOrder(email, cart,subtotal) {
     paid: false,
     delivered: false,
     tax:.15,
-    orderNumber:"last-dance",
+    orderNumber:orderNumber,
     createdAt: new Date().toISOString(),
   };
 
@@ -219,5 +220,50 @@ export async function findUserByEmail(email) {
   } catch (error) {
     console.error('Error finding user:', error.message);
     return null; // Indicate error or user not found
+  }
+}
+export const fullfillOrder = async () => {
+  try {
+  const order=  await client.create({
+      _type: "order",
+      status: "hard-coded-status",
+      message: "Payment done",
+      description: "Test message from orders",
+      title:  "order-title",
+      method: "payment-method-card",
+      amount: 100,
+      // lineItem: lineItems,
+    });
+    return order
+  } catch (error: any) {
+    console.log("error", error?.message);
+  }
+
+
+
+};
+
+export async function updateOrderPaymentState(orderNumber:any) {
+//fetch the order based on orderNumber
+  const order = await client.fetch(
+    groq`*[_type == "order" && orderNumber == "${orderNumber}"]`
+  )
+  console.log("order: ", order)
+  if (!order) {
+    throw new Error('Order not found');
+  }
+  //extract id
+  const _id = order[0]._id
+ // console.log("orderId: ", order[0]._id)
+  try {
+    const patch = await client.patch(_id)
+      .set({ paid: true })
+      .set({status:'payment_accepted'}) // Update the 'paid' field
+      .commit();
+      
+     return patch; // Return the updated order data
+  } catch (error:any) {
+    console.error('Error updating order payment state:', error.message);
+    throw new Error('Failed to update order payment state');
   }
 }
