@@ -23,6 +23,7 @@ export const POST = async (req: NextRequest) => {
 
     if (event.type === "checkout.session.completed") {
       const session = event.data.object
+      console.log("session: ", session)
 
       // const customerInfo = {
       //   clerkId: session?.client_reference_id,
@@ -40,9 +41,21 @@ export const POST = async (req: NextRequest) => {
 
       const retrieveSession = await stripe.checkout.sessions.retrieve(
         session.id,
-        { expand: ["line_items"]}
+        { expand: ["line_items.data.price.product"]}
       )
-      console.log("expanded_session: ", retrieveSession)
+
+      const lineItems = await retrieveSession?.line_items?.data
+      //console.log("line_items: ", lineItems)
+      const orderItems = lineItems?.map((item: any) => {
+        return {
+          product: item.price.product.metadata.productId,
+         // color: item.price.product.metadata.color || "N/A",
+          //size: item.price.product.metadata.size || "N/A",
+          quantity: item.quantity,
+        }
+      })
+      console.log("OrderItems:_: ", orderItems)
+
       //This is where id make updates to my database or CMS
 
    

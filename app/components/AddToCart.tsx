@@ -1,6 +1,6 @@
 "use client"
 import Options from "@/app/components/Options";
-import useCartStore from "../lib/cart-store"
+import useCartStore from "../lib/hooks/cart-store"
 import { useState } from "react";
 
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Button from "../components/Button";
-import useCartStore from "../lib/cart-store";
+import useCartStore from "../lib/hooks/cart-store";
 import Image from "next/image";
 
 import { loadStripe } from "@stripe/stripe-js";

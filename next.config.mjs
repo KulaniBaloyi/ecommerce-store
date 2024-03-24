@@ -11,6 +11,10 @@ const nextConfig = {
           protocol: 'https', // Allow both http and https
           hostname: 'img.youtube.com',
         },
+        {
+            protocol: 'https', // Allow both http and https
+            hostname: 'res.cloudinary.com',
+          },
       ],
     },
   };

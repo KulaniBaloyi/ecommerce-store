@@ -1,16 +1,19 @@
 "use client";
 import Button from "../components/Button";
 
+
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
-import useCart from "../lib/cart-store";
+import useCart from "../lib/hooks/cart-store";
+import { runFireworks } from "../lib/fireworks";
 
 const SucessPage = ({ searchParams }: any) => {
   const clearCart = useCart((state)=>state.clearCart)
 
   useEffect(() => {
-    !searchParams?.session_id ? redirect("/") : clearCart()
+   // !searchParams?.session_id ? redirect("/") : clearCart()
+    runFireworks()
   }, []);
   return (
     <section className="flex items-center justify-center py-20">
