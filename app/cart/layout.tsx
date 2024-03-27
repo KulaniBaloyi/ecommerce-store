@@ -1,5 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs";
-import "../globals.css";
+import "../globals.css"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -10,7 +10,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="">
         <Header/>
       <ClerkProvider>
       {children}

@@ -1,29 +1,29 @@
 "use client";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 
 
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
-import useCart from "../lib/hooks/cart-store";
-import { runFireworks } from "../lib/fireworks";
+import useCart from "../../lib/hooks/cart-store";
+import { runFireworks } from "../../lib/fireworks";
 
 const SucessPage = ({ searchParams }: any) => {
   const clearCart = useCart((state)=>state.clearCart)
 
   useEffect(() => {
-   // !searchParams?.session_id ? redirect("/") : clearCart()
+    !searchParams?.session_id ? redirect("/") : clearCart()
     runFireworks()
   }, []);
   return (
-    <section className="flex items-center justify-center py-20">
+    <section className="flex items-center justify-center py-20 min-h-[80dvh]">
       <div className="min-h-[400px] flex flex-col items-center justify-center gap-y-5">
         <h2 className="text-4xl font-bold">
           Your Payment Accepted by Garagemom.com
         </h2>
         <p>Now you can view your orders or continue Shopping with us</p>
         <div className="flex items-center gap-x-5">
-        <Button text={"view orders"} redirect={"/order"} />
+        <Button text={"view orders"} redirect={"/orders"} />
         <Button text={"back to shopping"} redirect={"/"} bgColor={"#e5202b"}/>
         </div>
       </div>

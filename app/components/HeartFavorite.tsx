@@ -12,7 +12,7 @@ interface HeartFavoriteProps {
 
 const HeartFavorite = ({ product, updateSignedInUser }: HeartFavoriteProps) => {
   const router = useRouter();
-  const { user } = useUser();
+  //const { user } = useUser();
 
   const [loading, setLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(false);

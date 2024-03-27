@@ -14,13 +14,13 @@ const Landing = async({name,video}:Video) => {
       </div>
       
         <section className='flex flex-col my-20 lg:my-10 mx-5 lg:gap-20 min-w-full'>
-            <h1 className='self-center text-[3rem] lg:text-[4em] leading-[1.2] font-[900] heading uppercase tracking-[-.02em] text-[#27292a]'>Quality tech videos</h1>
+            <h1 className='self-center text-[1em] lg:text-[2em] leading-[1.2] font-[900] heading uppercase tracking-[-.02em] text-[#27292a]'>Unleash Your Inner Athlete. Keep Moving Forward.</h1>
             <div className='px-5 flex flex-col lg:flex-row items-center gap-2 lg:gap-10'>
-                <button className='bg-[#e5202b]  hover:bg-opacity-85 transition-all duration-100 ease-in-out text-white border fancy__button py-4 px-10 uppercase text-lg text-center leading-[1.5] font-bold'>KB17 merch</button>
-             <HeroButton title="watch now"/>
-             <HeroButton title="the studio"/>
-             <HeroButton title="podcast"/>
-             <HeroButton title="autofocus"/>
+                <button className='bg-[#e5202b]  hover:bg-opacity-85 transition-all duration-100 ease-in-out text-white border fancy__button py-4 px-10 uppercase text-sm text-center leading-[1.5] font-bold'>shop merch</button>
+             <HeroButton title="get inspired"/>
+             <HeroButton title="join the community"/>
+             <HeroButton title="build your training plan"/>
+             <HeroButton title="contact us"/>
             </div>
         </section>
     </section>

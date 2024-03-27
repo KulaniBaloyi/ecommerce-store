@@ -9,6 +9,10 @@ import { fullfillOrder } from "@/ecommerce-store/schemas/lib/sanity-utils";
 import { updateOrderPaymentState } from "@/ecommerce-store/schemas/lib/sanity-utils";
 import Collections from "../components/Collections";
 import ProductList from "../components/ProductList";
+import NewReleases from "../components/NewReleases";
+import Banner from "../components/Banner";
+import ShopGrid from "../components/ShopGrid";
+import SocialMedia from "../components/SocialMedia";
 
 
 export default async function Home() {
@@ -22,22 +26,15 @@ export default async function Home() {
 
       )}
      
-      <div className="px-10">
-      <section className="flex flex-col">
-      <div className="min-w-full grid grid-cols-2  lg:grid-cols-4 gap-16 py-20 mx-auto ">
-        
-      { products.map((product)=>( <Card key={product._id} {...product}/>)) }
+      <div className="">
       
-      </div>
-      <Button redirect={"/collections/all"} text={"browse all products"}/>
-      
-      
-
-      </section>
-      <Image src="/banner.png" alt="banner" width={2000} height={1000} className="w-screen" />
-      <Collections />
-      <ProductList />
-      <RecentVideos/>
+      <NewReleases/>
+     <Banner/>
+     <NewReleases/>
+     <ShopGrid/>
+     <NewReleases/>
+     <SocialMedia/>
+     
       
       </div>
       

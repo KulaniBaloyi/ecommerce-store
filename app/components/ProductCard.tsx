@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import HeartFavorite from "./HeartFavorite";
+import { currencyformatter } from "../utils/currency-formatter";
+//import HeartFavorite from "./HeartFavorite";
 
 interface ProductCardProps {
   product: ProductType;
@@ -12,7 +13,7 @@ interface ProductCardProps {
 const ProductCard = ({ product, updateSignedInUser }: ProductCardProps ) => {
   return (
     <Link
-      href={`/products/${product._id}`}
+      href={`/product/${product._id}`}
       className="w-[220px] flex flex-col gap-2"
     >
       <Image
@@ -27,8 +28,8 @@ const ProductCard = ({ product, updateSignedInUser }: ProductCardProps ) => {
         <p className="text-small-medium text-grey-2">{product.category}</p>
       </div>
       <div className="flex justify-between items-center">
-        <p className="text-body-bold">${product.price}</p>
-        <HeartFavorite product={product} updateSignedInUser={updateSignedInUser} />
+        <p className="text-body-bold">{currencyformatter(product.price)}</p>
+        {/* <HeartFavorite product={product} updateSignedInUser={updateSignedInUser} /> */}
       </div>
     </Link>
   );

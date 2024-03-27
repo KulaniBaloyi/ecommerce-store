@@ -1,155 +1,125 @@
-"use client"
+"use client";
 
-import Link from "next/link";
-import Button from "../components/Button";
-import useCartStore from "../lib/hooks/cart-store";
+
+import useCart from "../lib/hooks/cart-store";
+
+import { useUser } from "@clerk/nextjs";
+import { MinusCircle, PlusCircle, Trash } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-import { loadStripe } from "@stripe/stripe-js";
+const Cart = () => {
+  const router = useRouter();
+  const { user } = useUser();
+  const cart = useCart();
 
-
-
-const CartPage = () => {
-  const cartItems = useCartStore((state) => state.cart);
-  const cartTotal = useCartStore((state)=>state.cartTotal)
-  const totalItems = useCartStore((state)=>state.totalItems)
-  const addToCart = useCartStore((state)=>state.addToCart)
-  const removeFromCart = useCartStore((state)=>state.removeFromCart)
-  //console.log("cartItems: ", cartItems)
-  const stripePromise = loadStripe(
-   // process.env.STRIPE_PUBLISHABLE_KEY
-   `${ process.env.STRIPE_PUBLISHABLE_KEY}`
+  const total = cart.cart.reduce(
+    (acc, cartItem) => acc + cartItem.item.price * cartItem.quantity,
+    0
   );
-  //console.log("API_KY: ", stripePromise)
-  const createCheckout = async () => {
-  
-      const stripe = await stripePromise;
+  const totalRounded = parseFloat(total.toFixed(2));
 
-      try{
-        const response = await fetch("http://localhost:3000/api/checkout", {
+  const customer = {
+    clerkId: user?.id,
+    email: user?.emailAddresses[0].emailAddress,
+    name: user?.fullName,
+  };
+
+  const handleCheckout = async () => {
+    try {
+      if (!user) {
+        router.push("sign-in");
+      } else {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/checkout`, {
           method: "POST",
-          headers: 
-          { "Content-Type": "appication/json",
-          "Cache-Control": "no-cache" },
-          body: JSON.stringify({
-            items: cartItems,
-            //email: session?.user?.email,
-            email:"kulani17@yahoo.com",
-            cartTotal:cartTotal
-          }),
+          body: JSON.stringify({ cartItems: cart.cart, customer }),
         });
-        const data = await response.json();
-        if (response.ok) {
-          window.location.href = data.url
-        //console.log("sessionID format data: ",data.id )
-          //stripe?.redirectToCheckout({ sessionId: `${data?.id}`});
-        }
-       else {
-        
-        // toast.error("Please sign in to make Checkout");
-       }
-      
-      }catch(err:any){
-
+        const data = await res.json();
+        window.location.href = data.url;
+        console.log(data);
       }
+    } catch (err) {
+      console.log("[checkout_POST]", err);
     }
+  };
+
   return (
-    <>
-      <section className="px-[5%] my-16 bg-white py-10 min-h-dvh">
-      {cartItems.length>0?<div key={"90_78"}>{totalItems>1? <h1 className="text-[1.5rem] leading-[1.5] italic text-[#27292a] heading tracking-[-0.02em] font-[900]">{totalItems} items in your cart for R{cartTotal}</h1>: <h1 className="text-[1.5rem] leading-[1.5] italic text-[#27292a] heading tracking-[-0.02em] font-[900]">{totalItems} item in your cart for R{cartTotal}</h1>}
+    <div className="flex gap-20 py-16 px-10 max-lg:flex-col max-sm:px-3 min-h-[80dvh] my-20">
+      <div className="w-2/3 max-lg:w-full">
+        <p className="text-heading3-bold">Shopping Cart</p>
+        <hr className="my-6" />
+
+        {cart.cart.length === 0 ? (
+          <p className="text-body-bold">No item in cart</p>
+        ) : (
+          <div>
+            {cart.cart.map((cartItem) => 
+            
+            (
              
-              <div className="flex gap-10">
-              <div className="flex-[.7] ">
-                  <h1>Item</h1>
-                </div>
-                <div className="flex-[.3] flex justify-between">
-                  <h1>Quantity</h1>
-                  <h1>Price</h1>
-                </div>
-              </div>
-             
-              {cartItems&&cartItems.map((item)=>{
-                const {_id,image,name,quantity,slug,price}= item
-                const {current}= slug
-              
-                return(
-                  <>
-                   <div key={_id} className="flex gap-10 mb-5">
-                   <div  className="flex-[.7] flex gap-2 border-4 border-dotted border-rose-500">
-                  <p className="overflow-hidden h-24 aspect-square relative">
-                    <Image src={image} alt={name} fill className="object-cover"/>
-                  </p>
-                  <div className="flex flex-col gap-1">
-                    <h2>{name}</h2>
-                    {/* <h2>Men, 3xl</h2> */}
+              <div className="w-full flex max-sm:flex-col max-sm:gap-3 hover:bg-grey-1 px-4 py-3 items-center max-sm:items-start justify-between">
+                <div className="flex items-center">
+                  <Image
+                    src={cartItem.item.media[0]}
+                    width={100}
+                    height={100}
+                    className="rounded-lg w-32 h-32 object-cover"
+                    alt="product"
+                  />
+                  <div className="flex flex-col gap-3 ml-4">
+                    <p className="text-body-bold">{cartItem.item.title}</p>
+                    {cartItem.color && (
+                      <p className="text-small-medium">{cartItem.color}</p>
+                    )}
+                    {cartItem.size && (
+                      <p className="text-small-medium">{cartItem.size}</p>
+                    )}
+                    <p className="text-small-medium">${cartItem.item.price}</p>
                   </div>
                 </div>
-                <div className="flex-[.3] flex justify-between items-center border-4 border-dotted border-teal-500">
-                <div className="w-24 min-w-16 h-14 text-[1rem] leading-[1.5] border-2">
-    <select  value={quantity}  onChange={(e)=>addToCart(item,e.target.value)}
-         className=" px-2 text-lg font-[500] border border-gray-300/80 bg-inherit w-full h-full cursor-pointer leading-[1.5] text-[#27292a] ">
-      
-      <option value={1}>1</option>
-      <option value={2}>2</option>
-      <option value={3}>3</option>
-      <option value={4}>4</option>
-      <option value={5}>5</option>
-      <option value={6}>6</option>
-      <option value={7}>7</option>
-      <option value={8}>8</option>
-      <option value={9}>9</option>
-      
-      <option value={10}>10</option>
-    </select>
-   
-    
-  
-  </div>
-  <h2>R {price}</h2>
-  <svg onClick={()=>removeFromCart(_id)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 cursor-pointer hover:text-red-500">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-</svg>
 
+                <div className="flex gap-4 items-center">
+                  <MinusCircle
+                    className="hover:text-red-1 cursor-pointer"
+                    onClick={() => cart.decreaseQuantity(cartItem.item._id)}
+                  />
+                  <p className="text-body-bold">{cartItem.quantity}</p>
+                  <PlusCircle
+                    className="hover:text-red-1 cursor-pointer"
+                    onClick={() => cart.increaseQuantity(cartItem.item._id)}
+                  />
                 </div>
-                   </div>
-                  </>
-                )
-              })}
-              <div className="flex gap-10">
-                <div className="flex-[.7] border-2 border-yellow-400">
-                  <br/>
-                 
-               
-                  <Button text={"back to shopping"} redirect={"/collections/all"} bgColor={"#27292a"}/>
-                </div>
-                <div className="flex-[.3] border-2 border-purple-900">
-                  <div className=" font-bold flex justify-between mb-2">
-                    <h2>Subtotal</h2>
-                    <h2>{cartTotal}</h2>
-                  </div> <button
-                  onClick={createCheckout}
-                 className={`block hover:opacity-90 duration-150 transition-all self-center bg-[#e5202b] text-white border fancy__button py-3 px-10 uppercase text-[1rem] text-center leading-[1.5] font-bold `}
-                >
-                  Proceed to Checkout
-                </button>
-                  {/* <Link href={'/checkout'} className={`block hover:opacity-90 duration-150 transition-all self-center bg-[#e5202b] text-white border fancy__button py-3 px-10 uppercase text-[1rem] text-center leading-[1.5] font-bold `}>Checkout</Link> */}
-                </div>
+
+                <Trash
+                  className="hover:text-red-1 cursor-pointer"
+                  onClick={() => cart.removeItem(cartItem.item._id)}
+                />
               </div>
-     
-            
-            </div>: <div className="flex flex-col gap-20 items-center">
-            <h1 className="heading self-center italic text-[2rem] leading-[1.2] font-[800] heading uppercase tracking-[-.02em] text-[#27292a]">
-              Your shopping cart is empty
-            </h1>
-            <Button text={"Start shopping"} redirect={"/collections/all"}/>
+            ))}
+          </div>
+        )}
+      </div>
 
-          </div>}
-         
-       
-      </section>
-      {/* <YouMayAlsoLike /> */}
-    </>
+      <div className="w-1/3 max-lg:w-full flex flex-col gap-8 bg-grey-1 rounded-lg px-4 py-5">
+        <p className="text-heading4-bold pb-4">
+          Summary{" "}
+          <span>{`(${cart.cart.length} ${
+            cart.cart.length > 1 ? "items" : "item"
+          })`}</span>
+        </p>
+        <div className="flex justify-between text-body-semibold">
+          <span>Total Amount</span>
+          <span>$ {totalRounded}</span>
+        </div>
+        <button
+          className="border rounded-lg text-body-bold bg-white py-3 w-full hover:bg-black hover:text-white"
+          onClick={handleCheckout}
+        >
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
   );
 };
 
-export default CartPage;
+export default Cart;
