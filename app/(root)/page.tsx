@@ -1,39 +1,37 @@
-import Image from "next/image";
-import Card from "../components/Card";
+
 import Landing from "../components/Landing";
-import RecentVideos from "../components/RecentVideos";
-import { createOrder, getOrdersByEmail, getProducts,getVideos } from "@/ecommerce-store/schemas/lib/sanity-utils";
-import { createUser } from "@/ecommerce-store/schemas/lib/sanity-utils";
-import Button from "../components/Button";
-import { fullfillOrder } from "@/ecommerce-store/schemas/lib/sanity-utils";
-import { updateOrderPaymentState } from "@/ecommerce-store/schemas/lib/sanity-utils";
-import Collections from "../components/Collections";
-import ProductList from "../components/ProductList";
-import NewReleases from "../components/NewReleases";
+
+import {getVideos } from "@/ecommerce-store/schemas/lib/sanity-utils";
+
+
 import Banner from "../components/Banner";
 import ShopGrid from "../components/ShopGrid";
 import SocialMedia from "../components/SocialMedia";
-
+import ProductCarousel from "../components/ProductCarousel";
+import { getProducts } from "../lib/actions/actions";
 
 export default async function Home() {
-  const products = await getProducts();
   const bgVideo = await getVideos()
-  
+  const leggings = await getProducts({categoryId:"fadf72a2-2b3b-41ca-9bb5-681f27970996"})
+  const sportsBras = await getProducts({categoryId:"d8549320-c72c-46a1-ad2e-7a60502bdee3"})
+  const tshirtsandtops = await getProducts({categoryId:"702bec42-65ac-41be-9f4f-d0dfb82caa94"})
+
   return (
     <main className="">
       {bgVideo.map((bgV)=>
       <Landing key={bgV.name} {...bgV}/>
 
       )}
-     
+
       <div className="">
-      
-      <NewReleases/>
-     <Banner/>
-     <NewReleases/>
+      <ProductCarousel products={leggings}/>
+     
+     <Banner />
+     <ProductCarousel products={sportsBras}/>
      <ShopGrid/>
-     <NewReleases/>
-     <SocialMedia/>
+     <ProductCarousel products={tshirtsandtops} />
+    
+    <SocialMedia/>
      
       
       </div>

@@ -1,22 +1,17 @@
 "use client"
-import Options from "@/app/components/Options";
+import CartIcon from "./cart-icon";
 import useCartStore from "../lib/hooks/cart-store"
 import { useState } from "react";
 
 
 
-const AddToCart = ({prodDetail}) => {
-    const addToCart = useCartStore((state) => state.addToCart);
-    const cart = useCartStore((state) => state.cart);
+const AddToCart = ({data}:any) => {
+    const addItem = useCartStore((state) => state.addItem);
+   
 
-    const [quantity, setQuantity] = useState(1)
-    const handleChange = (e) => {
-      setQuantity(e.target.value)
-    }
   return (
     <>
-     <Options quantity={quantity} handleChange={handleChange}/>
-     <button onClick={()=>addToCart(prodDetail,quantity)} className='fancy__button self-start text-[1rem] cursor-pointer leading-[1.5] font-bold uppercase text-white bg-cyan-800 h-full w-full grid place-content-center rounded-md'>Add to Cart</button>
+     <button onClick={()=>addItem(data)} className="cursor-pointer w-full bg-black py-3 fancy__button font-[500] uppercase flex items-center gap-4 justify-center text-white"><p>Add to cart</p><CartIcon/></button>
      </>
    
   )

@@ -4,65 +4,76 @@ import { toast } from "react-hot-toast";
 import { persist, createJSONStorage } from "zustand/middleware";
 
 interface CartItem {
-  item: ProductType;
+
+    id:string
+    price: number
+    image: string
+    name:string
   quantity: number;
   color?: string; // ? means optional
   size?: string; // ? means optional
 }
 
 interface CartStore {
-  cart: CartItem[];
+  items: CartItem[];
   addItem: (item: CartItem) => void;
   removeItem: (idToRemove: string) => void;
   increaseQuantity: (idToIncrease: string) => void;
   decreaseQuantity: (idToDecrease: string) => void;
   clearCart: () => void;
+  
 }
 
 const useCart = create(
   persist<CartStore>(
     (set, get) => ({
-      cart: [],
+      items: [],
       addItem: (data: CartItem) => {
-        const { item, quantity, color, size } = data;
-        const currentItems = get().cart; // all the items already in cart
-        const isExisting = currentItems.find(
-          (cartItem) => cartItem.item._id === item._id
+      
+        const currentItems = get().items; // all the items already in cart
+        const isExisting = currentItems.find((item) => item.id === data.id
         );
 
         if (isExisting) {
-          return toast("Item already in cart");
-        }
-
-        set({ cart: [...currentItems, { item, quantity, color, size }] });
-        toast.success("Item added to cart", { icon: "🛒" });
-      },
-      removeItem: (idToRemove: String) => {
-        const newCartItems = get().cart.filter(
-          (cartItem) => cartItem.item._id !== idToRemove
+          const updatedItems = currentItems.map((item) =>
+          item.id === data.id ? { ...item, quantity: item.quantity + 1 } : item
         );
-        set({ cart: newCartItems });
+        set({ items: updatedItems });
+        toast.success("Item quantity increased", { icon: "" });
+        } 
+
+        //if item is not in cart we add it
+        //we first retrieve all the existing items in cart and at the end we add the item
+        set({ items: [...get().items, data] });
+        toast.success('Item added to cart.');
+    
+        
+
+        
+      },
+      removeItem: (id: String) => {
+        set({items:[...get().items.filter((item)=>item.id !== id)]})   
         toast.success("Item removed from cart");
       },
-      increaseQuantity: (idToIncrease: String) => {
-        const newCartItems = get().cart.map((cartItem) =>
-          cartItem.item._id === idToIncrease
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
+      increaseQuantity: (id: String) => {
+        const newCartItems = get().items.map((item) =>
+          item.id === id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         );
-        set({ cart: newCartItems });
+        set({ items: newCartItems });
         toast.success("Item quantity increased");
       },
-      decreaseQuantity: (idToDecrease: String) => {
-        const newCartItems = get().cart.map((cartItem) =>
-          cartItem.item._id === idToDecrease
-            ? { ...cartItem, quantity: cartItem.quantity - 1 }
-            : cartItem
+      decreaseQuantity: (id: String) => {
+        const newCartItems = get().items.map((item) =>
+          item.id === id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
         );
-        set({ cart: newCartItems });
+        set({ items: newCartItems });
         toast.success("Item quantity decreased");
       },
-      clearCart: () => set({ cart: [] }),
+      clearCart: () => set({ items: [] }),
     }),
     {
       name: "cart-storage",
@@ -71,11 +82,3 @@ const useCart = create(
   )
 );
 export default useCart;
-
-function calculateCartTotal(cart) {
-  return cart.reduce((total, item) => total + item.price * item.quantity, 0);
-}
-
-function calculateTotalItems(cart) {
-    return cart.reduce((total, item) => total + 1, 0);
-  }

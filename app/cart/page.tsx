@@ -8,16 +8,19 @@ import { MinusCircle, PlusCircle, Trash } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+import CartItem2 from "../components/CartItem2";
+import CartItem from "../components/CartItem";
+import Link from "next/link";
+
 const Cart = () => {
   const router = useRouter();
   const { user } = useUser();
   const cart = useCart();
 
-  const total = cart.cart.reduce(
-    (acc, cartItem) => acc + cartItem.item.price * cartItem.quantity,
+  const total = cart.items.reduce(
+    (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const totalRounded = parseFloat(total.toFixed(2));
 
   const customer = {
     clerkId: user?.id,
@@ -44,80 +47,85 @@ const Cart = () => {
   };
 
   return (
-    <div className="flex gap-20 py-16 px-10 max-lg:flex-col max-sm:px-3 min-h-[80dvh] my-20">
-      <div className="w-2/3 max-lg:w-full">
-        <p className="text-heading3-bold">Shopping Cart</p>
-        <hr className="my-6" />
-
-        {cart.cart.length === 0 ? (
-          <p className="text-body-bold">No item in cart</p>
-        ) : (
-          <div>
-            {cart.cart.map((cartItem) => 
+    <div className="flex mb-10 gap-20 py-24 px-10 max-lg:flex-col max-sm:px-3 min-h-[80dvh] bg-white">
+      <div className="w-full">
+        <p className="text-center font-[500] leading-[1.2] tracking-[-.03em] text-[1.8em]">Shopping Cart</p>
+        <div className="hidden lg:flex mt-5 ">
+          <div className="flex-[.66] border-b flex border-[#e5e5e5]">
+            <h2 className="self-start pb-2 uppercase leading-[1.2] tracking-[-0.02em] font-[500] text-sm relative">
+              
+              Item</h2>
+          </div>
+          <div className="flex-[.17] uppercase text-sm leading-[1.2] font-[500] tracking-[-0.02em] border-b border-[#e5e5e5]">
+            <h2 className="pb-2">Quantity</h2>
+          </div>
+          <div className="flex-[.17]  uppercase text-sm leading-[1.2] font-[500] tracking-[-0.02em] border-b border-[#e5e5e5]">
+            <h2 className="pb-2">Price</h2>
+          </div>
+         
+         
+          
+        </div>
+        {/**mobile version */}
+        <div className="lg:hidden">
+          <h2 className="border-b border-[#e5e5e5] pb-2 uppercase mb-4">Item</h2>
+          {/**loop through cart items for mobile vi */}
+          {cart.cart.map((cartItem) => 
             
             (
-             
-              <div className="w-full flex max-sm:flex-col max-sm:gap-3 hover:bg-grey-1 px-4 py-3 items-center max-sm:items-start justify-between">
-                <div className="flex items-center">
-                  <Image
-                    src={cartItem.item.media[0]}
-                    width={100}
-                    height={100}
-                    className="rounded-lg w-32 h-32 object-cover"
-                    alt="product"
-                  />
-                  <div className="flex flex-col gap-3 ml-4">
-                    <p className="text-body-bold">{cartItem.item.title}</p>
-                    {cartItem.color && (
-                      <p className="text-small-medium">{cartItem.color}</p>
-                    )}
-                    {cartItem.size && (
-                      <p className="text-small-medium">{cartItem.size}</p>
-                    )}
-                    <p className="text-small-medium">${cartItem.item.price}</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4 items-center">
-                  <MinusCircle
-                    className="hover:text-red-1 cursor-pointer"
-                    onClick={() => cart.decreaseQuantity(cartItem.item._id)}
-                  />
-                  <p className="text-body-bold">{cartItem.quantity}</p>
-                  <PlusCircle
-                    className="hover:text-red-1 cursor-pointer"
-                    onClick={() => cart.increaseQuantity(cartItem.item._id)}
-                  />
-                </div>
-
-                <Trash
-                  className="hover:text-red-1 cursor-pointer"
-                  onClick={() => cart.removeItem(cartItem.item._id)}
-                />
-              </div>
+            
+             <CartItem  key={cartItem._id} cartItem={...cartItem}/>
             ))}
-          </div>
-        )}
-      </div>
 
-      <div className="w-1/3 max-lg:w-full flex flex-col gap-8 bg-grey-1 rounded-lg px-4 py-5">
-        <p className="text-heading4-bold pb-4">
-          Summary{" "}
-          <span>{`(${cart.cart.length} ${
-            cart.cart.length > 1 ? "items" : "item"
-          })`}</span>
-        </p>
-        <div className="flex justify-between text-body-semibold">
-          <span>Total Amount</span>
-          <span>$ {totalRounded}</span>
         </div>
-        <button
-          className="border rounded-lg text-body-bold bg-white py-3 w-full hover:bg-black hover:text-white"
-          onClick={handleCheckout}
-        >
-          Proceed to Checkout
-        </button>
+        {cart.items.map((item) => 
+            
+            (
+            
+             <CartItem2  key={item.id} item={...item}/>
+            ))}
+  
+    
+       {/**Checkout section  */}
+        <div className="lg:hidden mt-16 w-full">
+        <div className="w-full ">
+        <button className="py-2 w-full  max-w-full px-4 text-base leading-[1.2] tracking-[-.03em] uppercase border bg-white border-[#e0e0e0]">continue shopping</button>
+            <p className="py-2 max-w-full px-4 text-sm leading-[1.2] tracking-[-.03em] uppercase text-[#3c763d] border bg-[#dff0d8] border-[#d6e9c6]">spend <span className="font-[500]">R145.00 ZAR</span> more to get free shipping</p>
+        </div>
+        <div className=" ">
+          <h2 className="border-[#e0e0e0] border-b pb-2 tracking-[-.03em] leading-[1.2] font-[700] text-[1.2em] uppercase">Summary</h2>
+          <div className="flex justify-between items-center my-4 font-[700] leading-[1.2] tracking-[-.03em]">
+            <h2>Subtotal</h2>
+            <div className="flex flex-col">
+            <h2>R {total.toFixed(2)}</h2>
+            <p className="text-xs italic text-gray-500">incl. sales tax</p>
+            </div>
+           
+            </div>        
+          <button className="fancy__button bg-neutral-900 text-white px-8 py-4 w-full uppercase text-[1.2em] font-[500]">checkout</button>
+        </div>
       </div>
+         <div className="hidden lg:flex justify-between mt-16 ">
+        <div className=" ">
+        <button onClick={()=>router.push("/collections/shop")} className="py-2 w-full  max-w-full px-4 text-base leading-[1.2] tracking-[-.03em] uppercase border bg-white border-[#e0e0e0] cursor-pointer">continue shopping</button>
+            <p className="py-2 max-w-full px-4 text-sm leading-[1.2] tracking-[-.03em] uppercase text-[#3c763d] border bg-[#dff0d8] border-[#d6e9c6]">spend <span className="font-[500]">R145.00 ZAR</span> more to get free shipping</p>
+        </div>
+        <div className="flex-[.5] ">
+          <h2 className="border-[#e0e0e0] border-b pb-2 tracking-[-.03em] leading-[1.2] font-[700] text-[1.2em] uppercase">Summary</h2>
+          <div className="flex justify-between items-center my-4 font-[700] leading-[1.2] tracking-[-.03em]">
+            <h2>Subtotal</h2>
+            <div className="flex flex-col">
+            <h2>R {total.toFixed(2)}</h2>
+            <p className="text-xs italic text-gray-500">incl. sales tax</p>
+            </div>
+           
+            </div>        
+          <button className="fancy__button bg-neutral-900 text-white px-8 py-4 w-full uppercase text-[1.2em] font-[500]">checkout</button>
+        </div>
+      </div>
+      </div>
+     
+
     </div>
   );
 };

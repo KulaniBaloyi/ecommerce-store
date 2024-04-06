@@ -1,6 +1,6 @@
 
 import { getProducts } from "../lib/actions/actions";
-import Card from "./Card";
+import ProductCard from "./ProductCard";
 
 const ProductList = async () => {
   const products = await getProducts();
@@ -13,7 +13,7 @@ const ProductList = async () => {
       ) : (
         <div className="min-w-full grid grid-cols-2  lg:grid-cols-4 gap-16 py-20 mx-auto">
           {products.map((product: ProductType) => (
-            <Card key={product._id} product={product}/>
+            <ProductCard key={product._id} product={product}/>
           ))}
         </div>
       )}

@@ -3,20 +3,17 @@
 const Options = ({quantity,handleChange}) => {
 
   return (
-    <div className="w-24 min-w-16 h-14 text-[1rem] leading-[1.5] border-2">
-    <select  value={quantity}
-        onChange={handleChange} className=" px-2 text-lg font-[500] border-2 border-gray-300/80 bg-inherit w-full h-full cursor-pointer leading-[1.5] text-[#27292a] ">
-      <option value={1}>1</option>
-      <option value={2}>2</option>
-      <option value={3}>3</option>
-      <option value={4}>4</option>
-      <option value={5}>5</option>
-      <option value={6}>6</option>
-      <option value={7}>7</option>
-      <option value={8}>8</option>
-      <option value={9}>9</option>
-      
-      <option value={10}>10</option>
+    <div className="w-40 max-w-full min-w-16 h-10 text-[.6rem] leading-[1.5] border">
+    <select  value={"m"}
+         className=" px-2 text-sm font-[500] border-0 uppercase active:outline-none active:border-0 focus:outline-none  bg-inherit w-full h-full cursor-pointer leading-[1.5] text-[#27292a] ">
+      <option value={"xs"}>xs</option>
+      <option value={"s"}>s</option>
+      <option value={"m"}>m</option>
+      <option value={"l"}>l</option>
+      <option value={"xl"}>xl</option>
+      <option value={"xxl"}>xxl</option>
+
+  
     </select>
   
   

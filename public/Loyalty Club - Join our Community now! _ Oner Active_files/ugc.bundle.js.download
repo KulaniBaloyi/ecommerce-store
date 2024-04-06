@@ -1,0 +1,524 @@
+/**
+ * Stackla is made available under a commercial licence
+ * and is subject to Stackla's Terms of Service.
+ *
+ * Refer to https://stackla.com/terms-of-service/ 
+ * or contact support@nosto.com for further clarification.
+ *
+ * Built on <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %>
+ */
+
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+var __webpack_exports__ = {};
+
+;// CONCATENATED MODULE: ./packages/analytics-tracking/src/tracking/Helpers.ts
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+const storeTileInteractions = (tileInteractions) => {
+  localStorage.setItem(
+    "nosto_ugc_tile_interactions",
+    JSON.stringify(tileInteractions)
+  );
+};
+const getTerms = (data) => {
+  var _a;
+  if (!data.tileData && !data.terms) {
+    return [];
+  }
+  const terms = (data.tileData && data.tileData.term_meta) !== void 0 ? (_a = data.tileData) == null ? void 0 : _a.term_meta : data.terms;
+  return terms ? terms.map((t) => {
+    var _a2;
+    return (_a2 = t.term_id) != null ? _a2 : t;
+  }).filter((term) => term !== null) : [];
+};
+const getTags = (data) => {
+  var _a, _b;
+  if (!data.tileData && !data.tags) {
+    return [];
+  }
+  const tags = (_b = data.tags) != null ? _b : (_a = data.tileData) == null ? void 0 : _a.tags;
+  return tags ? tags.map((tag) => tag.id ? tag.id : tag).filter((tag) => tag !== null) : [];
+};
+const getProductTags = (data) => {
+  var _a;
+  if (!data.tileData && !data.productTags) {
+    return [];
+  }
+  const productTags = (_a = data.tileData && data.tileData.tags_extended) != null ? _a : data.productTags;
+  return productTags ? productTags.map(
+    (item) => item.ext_product_id !== void 0 ? item.ext_product_id : item
+  ).filter(
+    (product_id) => product_id !== null && product_id !== void 0 && product_id.toString().length > 1
+  ) : [];
+};
+const debug = (message) => {
+  if (window.location.href.indexOf("gaDebug=1") > -1 || "production" === "test") {
+    console.log(message);
+  }
+};
+const getTileInteractions = () => {
+  const json = localStorage.getItem("nosto_ugc_tile_interactions");
+  if (json) {
+    return json;
+  }
+  return "[]";
+};
+const getGoogleEventParameters = (data) => {
+  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
+  let eventData = {
+    nosto_ugc_widget: typeof data.widgetId !== "undefined" ? data.widgetId : 0,
+    nosto_ugc_filter: typeof data.filterId !== "undefined" ? data.filterId : 0
+  };
+  if (data.locationId) {
+    eventData = __spreadProps(__spreadValues({}, eventData), {
+      nosto_ugc_location_id: data.locationId,
+      nosto_ugc_location_name: data.locationName
+    });
+  }
+  if (data.shareNetwork) {
+    eventData = __spreadProps(__spreadValues({}, eventData), {
+      nosto_ugc_shared_network: data.shareNetwork ? data.shareNetwork : "N/A"
+    });
+  }
+  if (data.id || data.tileData) {
+    const terms = getTerms(data);
+    const tags = getTags(data);
+    eventData = __spreadValues({}, eventData);
+    if (data.id || data.tileData) {
+      eventData = __spreadProps(__spreadValues({}, eventData), {
+        nosto_ugc_tile_id: (_b = data.id) != null ? _b : (_a = data.tileData) == null ? void 0 : _a._id["$id"]
+      });
+    }
+    if (data.source || data.tileData) {
+      eventData = __spreadProps(__spreadValues({}, eventData), {
+        nosto_ugc_source: (_d = data.source) != null ? _d : (_c = data.tileData) == null ? void 0 : _c.source
+      });
+    }
+    if (data.media || data.tileData) {
+      eventData = __spreadProps(__spreadValues({}, eventData), {
+        nosto_ugc_media: (_f = data.media) != null ? _f : (_e = data.tileData) == null ? void 0 : _e.media
+      });
+    }
+    if (data.user || data.tileData) {
+      eventData = __spreadProps(__spreadValues({}, eventData), {
+        nosto_ugc_user: (_h = data.user) != null ? _h : (_g = data.tileData) == null ? void 0 : _g.user
+      });
+    }
+    if (data.url || data.tileData) {
+      eventData = __spreadProps(__spreadValues({}, eventData), {
+        nosto_ugc_url: (_j = data.url) != null ? _j : (_i = data.tileData) == null ? void 0 : _i.original_url
+      });
+    }
+    if (terms.length > 0) {
+      eventData = __spreadProps(__spreadValues({}, eventData), {
+        nosto_ugc_terms: terms.join(",")
+      });
+    }
+    if (tags.length > 0) {
+      eventData = __spreadProps(__spreadValues({}, eventData), {
+        nosto_ugc_tags: tags.join(",")
+      });
+    }
+  }
+  return eventData;
+};
+
+;// CONCATENATED MODULE: ./packages/analytics-tracking/src/tracking/TrackableTile.ts
+var TrackableTile_defProp = Object.defineProperty;
+var TrackableTile_defProps = Object.defineProperties;
+var TrackableTile_getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var TrackableTile_getOwnPropSymbols = Object.getOwnPropertySymbols;
+var TrackableTile_hasOwnProp = Object.prototype.hasOwnProperty;
+var TrackableTile_propIsEnum = Object.prototype.propertyIsEnumerable;
+var TrackableTile_defNormalProp = (obj, key, value) => key in obj ? TrackableTile_defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var TrackableTile_spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (TrackableTile_hasOwnProp.call(b, prop))
+      TrackableTile_defNormalProp(a, prop, b[prop]);
+  if (TrackableTile_getOwnPropSymbols)
+    for (var prop of TrackableTile_getOwnPropSymbols(b)) {
+      if (TrackableTile_propIsEnum.call(b, prop))
+        TrackableTile_defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var TrackableTile_spreadProps = (a, b) => TrackableTile_defProps(a, TrackableTile_getOwnPropDescs(b));
+
+const Tile = {
+  get: (tile) => Tile.create(tile),
+  create: (defaultTile = {}) => {
+    var _a, _b;
+    const tile = TrackableTile_spreadProps(TrackableTile_spreadValues({}, defaultTile), {
+      id: defaultTile.id ? defaultTile.id : null,
+      terms: defaultTile.terms ? defaultTile.terms.map((t) => t ? parseInt(t.toString()) : 0) : [],
+      tags: defaultTile.tags ? defaultTile.tags.map((t) => t ? parseInt(t.toString()) : 0) : [],
+      productTags: defaultTile.productTags ? defaultTile.productTags.map((t) => t ? parseInt(t.toString()) : 0) : [],
+      widgetId: defaultTile.widgetId ? parseInt(defaultTile.widgetId.toString()) : 0,
+      nostoUGCConversion: (_a = defaultTile.nostoUGCConversion) != null ? _a : false,
+      nostoUGCConversionExpiry: (_b = defaultTile.nostoUGCConversionExpiry) != null ? _b : (/* @__PURE__ */ new Date()).getTime() - 1
+    });
+    const tileObject = {
+      getTile: () => tile,
+      hasTile: () => !!tile.id,
+      getTags: () => tile.tags,
+      getTerms: () => tile.terms,
+      getProductTags: () => tile.productTags,
+      getWidgetId: () => tile.widgetId,
+      isUGCConversion: () => {
+        var _a2;
+        return (_a2 = tile.nostoUGCConversion) != null ? _a2 : false;
+      },
+      isUGCConversionExpired: () => {
+        var _a2;
+        return ((_a2 = tile.nostoUGCConversionExpiry) != null ? _a2 : 0) < (/* @__PURE__ */ new Date()).getTime();
+      },
+      getConversionExpiry: () => {
+        var _a2;
+        return (_a2 = tile.nostoUGCConversionExpiry) != null ? _a2 : 0;
+      },
+      setUGCConversion: (conversion) => {
+        debug(`Setting UGC Conversion to ${conversion} - before`);
+        debug(tile.toString());
+        tile.nostoUGCConversion = conversion;
+        return Tile.get(tile);
+      },
+      setUGCConversionExpiry: (date) => {
+        if (date) {
+          tile.nostoUGCConversionExpiry = date;
+          return Tile.get(tile);
+        }
+        tile.nostoUGCConversionExpiry = (/* @__PURE__ */ new Date()).getTime() + 864e5;
+        return Tile.get(tile);
+      },
+      /**
+       * Returns a JSON string of the tile object, allows filtering out by properties
+       * @param selected_properties
+       */
+      getJSON: (selected_properties = []) => {
+        const allProperties = Object.keys(tile).reduce(
+          (acc, key) => {
+            acc[key] = tile[key];
+            return acc;
+          },
+          {}
+        );
+        if (selected_properties.length === 0) {
+          return JSON.stringify(allProperties);
+        }
+        const object = selected_properties.reduce(
+          (returnedProperties, property) => {
+            return TrackableTile_spreadProps(TrackableTile_spreadValues({}, returnedProperties), {
+              [property]: tile[property]
+            });
+          },
+          {}
+        );
+        return JSON.stringify(object);
+      },
+      /**
+       * Stores the tile in local storage
+       */
+      save: () => {
+        const existingProperties = getTileInteractions();
+        let existingPropertiesObject = existingProperties ? JSON.parse(existingProperties) : [];
+        if (!Array.isArray(existingPropertiesObject)) {
+          existingPropertiesObject = [existingPropertiesObject];
+        }
+        const commonProperties = existingPropertiesObject.filter(
+          (item, index) => {
+            if (item.id !== tile.id) {
+              return;
+            }
+            existingPropertiesObject[index] = tile;
+            return true;
+          }
+        );
+        storeTileInteractions(existingPropertiesObject);
+        if (commonProperties.length == 0) {
+          existingPropertiesObject.push(tile);
+          storeTileInteractions(existingPropertiesObject);
+        }
+        return tileObject;
+      }
+    };
+    return tileObject;
+  },
+  createFromJSONString: (json) => {
+    let tiles = [];
+    if (json) {
+      tiles = JSON.parse(json);
+    }
+    if (!Array.isArray(tiles)) {
+      tiles = [tiles];
+    }
+    return {
+      get: () => tiles.map((tile) => {
+        return Tile.get(tile);
+      }),
+      first: () => {
+        const tile = tiles[0];
+        return Tile.get(tile);
+      }
+    };
+  },
+  getAllFromStorage: () => {
+    const json = getTileInteractions();
+    if (json) {
+      return Tile.createFromJSONString(json).get();
+    }
+    return [];
+  }
+};
+/* harmony default export */ const TrackableTile = (Tile);
+
+;// CONCATENATED MODULE: ./packages/analytics-tracking/src/tracking/AttributionModel.ts
+
+
+/* harmony default export */ const AttributionModel = ({
+  getProductByProductId: (productId) => {
+    const product = TrackableTile.getAllFromStorage().find(
+      (tile) => tile.getProductTags().includes(parseInt(productId))
+    );
+    if (product) {
+      return product;
+    }
+    return null;
+  },
+  shopperHasConversion: () => {
+    return TrackableTile.getAllFromStorage().filter((tile) => {
+      const conversion = tile.isUGCConversion();
+      const expiry = tile.isUGCConversionExpired();
+      return conversion && !expiry;
+    }).length > 0;
+  },
+  getProductsWithConversions: () => {
+    return TrackableTile.getAllFromStorage().filter(
+      (tile) => tile.isUGCConversion()
+    );
+  },
+  resetUserConversions: (tilesOnly = false) => {
+    const storedItems = TrackableTile.getAllFromStorage();
+    storedItems.forEach((product) => {
+      if (tilesOnly && !product.hasTile()) {
+        return;
+      }
+      product.setUGCConversion(false);
+      product.save();
+    });
+  },
+  syncWithCart(productId) {
+    const productObject = this.getProductByProductId(productId);
+    if (productObject) {
+      productObject.setUGCConversion(true);
+      productObject.setUGCConversionExpiry();
+      productObject.save();
+    }
+  },
+  createGoogleUserProperties: (tiles) => {
+    if (!tiles || !Array.isArray(tiles)) {
+      return;
+    }
+    const properties = tiles.map((tile) => {
+      return getGoogleEventParameters(tile.getTile());
+    });
+    const eventMapping = {
+      nosto_ugc_tags: "nosto_ugc_tags_user",
+      nosto_ugc_terms: "nosto_ugc_terms_user",
+      nosto_ugc_media: "nosto_ugc_media_user",
+      nosto_ugc_widget: "nosto_ugc_widget_user",
+      nosto_ugc_tile_id: "nosto_ugc_tile_id_user"
+    };
+    const userProperties = properties.reduce(
+      (acc, property) => {
+        Object.keys(property).forEach((key) => {
+          var _a;
+          const userKey = (_a = eventMapping[key]) != null ? _a : key;
+          if (acc[userKey] && acc[userKey] !== property[key]) {
+            acc[userKey] = `${acc[userKey]},${property[key]}`;
+          } else {
+            if (property[key] !== void 0) {
+              acc[userKey] = property[key];
+            }
+          }
+        });
+        return acc;
+      },
+      {}
+    );
+    userProperties.is_nosto_ugc_user = "true";
+    return userProperties;
+  }
+});
+
+;// CONCATENATED MODULE: ./packages/analytics-tracking/src/tracking/user.ts
+
+
+function initGADatalayer() {
+  window.dataLayer = window.dataLayer || [];
+}
+function gtag(...args) {
+  window.dataLayer.push(args);
+}
+function getUserProperties() {
+  if (isValidProductSession()) {
+    const productId = findUGCProductId();
+    if (productId) {
+      const product = AttributionModel.getProductByProductId(productId);
+      if (product) {
+        return AttributionModel.createGoogleUserProperties([product]);
+      }
+    }
+  }
+  return AttributionModel.createGoogleUserProperties(
+    TrackableTile.getAllFromStorage()
+  );
+}
+function getUserId() {
+  const userId = localStorage.getItem("nosto_ugc_user_id");
+  if (userId) {
+    return userId;
+  }
+  return false;
+}
+function isUGCConversion() {
+  return AttributionModel.shopperHasConversion();
+}
+function setUGCConversionExpiry() {
+  const properties = getUserProperties();
+  const date = (/* @__PURE__ */ new Date()).getTime() + 864e5;
+  if (properties) {
+    properties.nosto_ugc_conversion_expiry = date;
+    localStorage.setItem(
+      "nosto_ugc_user_properties",
+      JSON.stringify(properties)
+    );
+  }
+  return date;
+}
+function setUGCConversion() {
+  const productId = findUGCProductId();
+  if (!productId) {
+    return false;
+  }
+  const productByProductId = AttributionModel.getProductByProductId(productId);
+  if (!productByProductId) {
+    return false;
+  }
+  productByProductId.setUGCConversion(true).setUGCConversionExpiry().save();
+  return true;
+}
+function attachUserProperties() {
+  const properties = getUserProperties();
+  if (properties) {
+    gtag("set", "user_properties", properties);
+  }
+  return getUserProperties();
+}
+function attachCurrentUser() {
+  const userId = getUserId();
+  if (userId) {
+    gtag("set", "user_id", userId);
+  }
+  return userId;
+}
+function initUserProperties(retry = false, retryCount = 0) {
+  syncWithCart();
+  attachCurrentUser();
+  if (isUGCConversion()) {
+    attachUserProperties();
+  }
+  if (isValidProductSession()) {
+    setUGCConversion();
+    attachUserProperties();
+    if (retry && retryCount == 1) {
+      gtag("event", "nosto_ugc_view_item");
+    }
+  }
+  if (!retry) {
+    setTimeout(() => {
+      initUserProperties(true, 1);
+    }, 1e3);
+    setInterval(() => {
+      initUserProperties(true);
+    }, 6e4 * 3);
+  }
+  return false;
+}
+function findUGCProductId() {
+  const productId = document.querySelector(
+    ".nosto_product .product_id"
+  );
+  if (productId) {
+    return productId.innerText;
+  }
+  return false;
+}
+function syncWithCart() {
+  const cartContents = document.querySelectorAll(
+    ".nosto_cart .line_item"
+  );
+  if (cartContents && cartContents.length > 0) {
+    AttributionModel.resetUserConversions(true);
+    cartContents.forEach((product) => {
+      var _a;
+      const innerHTML = (_a = product == null ? void 0 : product.querySelector(".product_id")) == null ? void 0 : _a.innerHTML;
+      if (!innerHTML) {
+        return;
+      }
+      AttributionModel.syncWithCart(innerHTML);
+    });
+  }
+  return false;
+}
+function isValidProductSession() {
+  var _a;
+  const productId = findUGCProductId();
+  if (!productId) {
+    return false;
+  }
+  const product = AttributionModel.getProductByProductId(productId);
+  if (product) {
+    product.setUGCConversion(true);
+    product.setUGCConversionExpiry();
+    product.save();
+    return true;
+  }
+  const conversionProducts = (_a = AttributionModel.getProductsWithConversions()) != null ? _a : [];
+  return AttributionModel.getProductByProductId(productId) || conversionProducts.length > 0;
+}
+function UserTracking() {
+  initGADatalayer();
+  initUserProperties();
+}
+
+;// CONCATENATED MODULE: ./packages/analytics-tracking/src/analytics.entry.ts
+
+try {
+  new UserTracking();
+} catch (e) {
+  console.log("Failed to intitialise UGC client script", e);
+}
+
+;// CONCATENATED MODULE: ./packages/analytics-tracking/src/ugc.entry.ts
+
+
+/******/ })()
+;
