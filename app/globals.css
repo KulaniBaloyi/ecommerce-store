@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html,
+body,
+:root{
+  height: 100%;
+}
+.prev{
+  transform: translate3d(-50%, -50%, 0);
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+}
+
+
+.next{
+  transform: translate(50%, -50%);
+  box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+}
+
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+.embla__container {
+  backface-visibility: hidden;
+  display: flex;
+  touch-action: pan-y;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+
+.fancy__button{
+  clip-path: polygon(18px 0%, 100% 0%, calc(100% - 18px) 100%, 0% 100%);
+}
+
+@layer components {
+  .heading {
+    @apply text-xl md:text-2xl lg:text-3xl uppercase font-[700] leading-[1.1];
+  }
+  .title{
+    @apply h-4 font-[500] text-sm leading-[1.1] capitalize
+  }
+  .image-container{
+
+    @apply  w-full aspect-[12/14] lg:aspect-[1440/1800] relative
+  }
+}
+.gallery:nth-child(3n) {
+  grid-area: span 2 / span 2;
+}
+
+
