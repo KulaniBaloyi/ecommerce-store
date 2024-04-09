@@ -3,8 +3,6 @@ import Banner from "@/components/Banner";
 import Landing from "@/components/Landing";
 import ProductCarousel from "@/components/ProductsCarousel";
 import ShopGrid from "@/components/ShopGrid";
-import SocialMediaCarousel from "@/components/SocialMediaCarousel";
-import Container from "@/components/ui/container";
 import getProducts from "@/actions/get-products";
 
 export default async function Home () {
@@ -15,15 +13,11 @@ export default async function Home () {
    
 <main className="mt-16 min-h-screen">
   <Landing/>
- 
     <ProductCarousel data={tshirtsandtops} suggested={false}/>
     <Banner/>
     <ProductCarousel data={leggings} suggested={false}/>
     <ShopGrid/>
     <ProductCarousel data={sportsBras} suggested={false}/>
-
- 
-  
   </main>
   );
 }
