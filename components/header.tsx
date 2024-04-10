@@ -51,7 +51,7 @@ const Header = () => {
       <li className="cursor-pointer hidden lg:flex">loyalty club</li>
      
       <li className=" hidden lg:flex">about us</li>
-      <Link className="lg:hidden" href={"/"}>Home</Link>
+      <Link className="lg:hidden hover:border-b hover:border-black" href={"/"}>Home</Link>
     </ul>
     <ul className="flex justify-end items-center gap-4 flex-[.2]">
       <li><Search className="h-4 w-4 lg:w-5 lg:h-5"/></li>
