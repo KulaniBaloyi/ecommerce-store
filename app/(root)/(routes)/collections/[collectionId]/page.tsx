@@ -1,5 +1,15 @@
+import getProducts from "@/actions/get-products"
+import ProductCard from "@/components/ProductCard"
 
-const Collections = () => {
+interface CollectionPageProps {
+  params:{
+    collectionId:string
+  }
+ }
+const Collections:React.FC<CollectionPageProps> = async({params}) => {
+
+  const {collectionId}= params
+  const products = await getProducts({categoryId:process.env.CATEGORY_SPORTSBRA})
    
   return (
     <div>
@@ -24,7 +34,11 @@ const Collections = () => {
         <h2>Shirts & Tops</h2>
         <h2>Sport Bras</h2>
     </nav>
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mb-10">
+    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-10">
+      {products.map((prod:any)=>{
+        return <ProductCard key={prod.id} data={prod}/>
+      })}
+       {/* <div className="border border-rounded-md w-full image-container"></div>
        <div className="border border-rounded-md w-full image-container"></div>
        <div className="border border-rounded-md w-full image-container"></div>
        <div className="border border-rounded-md w-full image-container"></div>
@@ -39,8 +53,7 @@ const Collections = () => {
        <div className="border border-rounded-md w-full image-container"></div>
        <div className="border border-rounded-md w-full image-container"></div>
        <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
+       <div className="border border-rounded-md w-full image-container"></div> */}
 
     </div>
    </section>

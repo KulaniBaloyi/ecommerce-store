@@ -11,7 +11,7 @@ const Footer = () => {
             <p className="h-full aspect-square bg-black text-white text-xl grid place-content-center">&gt;</p>
           </div>
           
-          <Link href="/">   <h1 className="heading">E/S</h1></Link>
+          <Link href="/" className="order-first lg:order-none">   <h1 className="heading">E/S</h1></Link>
       </section>
       <section className="flex flex-wrap gap-2 lg:gap-5 lg:order-1 py-1.5 px-3 lg:col-span-3">
       <div className=" min-w-14 max-w-xs ">

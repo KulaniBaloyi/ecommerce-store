@@ -20,7 +20,7 @@ const getProducts = async (query: Query) => {
       isFeatured: query.isFeatured,
     },
   })
-
+  
   const res = await fetch(url)
 
   if(!res.ok){

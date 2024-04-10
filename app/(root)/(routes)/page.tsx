@@ -18,11 +18,11 @@ export default async function Home () {
 <main className="mt-16 min-h-screen">
   <Landing/>
 
-    {/* <ProductCarousel data={tshirtsandtops} suggested={false}/> */}
+    <ProductCarousel data={tshirtsandtops} suggested={false}/>
     <Banner/>
-    {/* <ProductCarousel data={leggings} suggested={false}/> */}
+    <ProductCarousel data={leggings} suggested={false}/>
     <ShopGrid/>
-    {/* <ProductCarousel data={sportsBras} suggested={false}/> */}
+    <ProductCarousel data={sportsBras} suggested={false}/>
   </main>
   );
 }
