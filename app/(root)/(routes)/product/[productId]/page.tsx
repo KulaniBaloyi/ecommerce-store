@@ -56,7 +56,7 @@ const suggestedProducts = await getProducts({
             <div className="flex lg:hidden gap-2 w-full h-[150px] ">
                 {images.map((img:any,index:any)=>{
                     return(
-                        <div key={index} className="first:hidden shrink-0 basis-[25%] w-full relative aspect-3/4 h-full border overflow-hidden">
+                        <div key={index} className="first:hidden basis-[25%] w-full relative aspect-3/4 h-full border overflow-hidden">
                             <Image alt={`img-${index}`} src={img.url} fill className="bg-cover"/></div>
                     )
                 })}

@@ -32,7 +32,7 @@ const Header = () => {
 
     if(!isMounted)return
   return (
-    <header className={`${pathname=="/collections/shop"&&"text-white "} bg-white fixed bg-transparent top-0 left-0 right-0 z-[99999999] transition-all duration-500 ease-in-out flex justify-between items-center p-2 px-4 lg:px-10 lg:py-4 ${
+    <header className={`${pathname=="/collections/shop"&&"text-white "} bg-white fixed bg-transparent top-0 left-0 right-0 z-[99999999] transition-all duration-500 ease-in-out flex justify-between items-center p-4 lg:px-10 lg:py-4 ${
       isSticky && "bg-white/30 backdrop-blur-xl"} ${pathname=="/collections/shop"&&isSticky&&"text-black"}`}
 
   >
