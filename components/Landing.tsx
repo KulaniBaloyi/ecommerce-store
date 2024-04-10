@@ -15,7 +15,7 @@ const Landing = ({video}:any) => {
         <section className='flex m-auto flex-col my-16 lg:my-10 lg:gap-20 min-w-full max-w-6xl'>
             <h1 className='mr-6 lg:mr-0 mb-10 lg:mb-0 self-center text-[2em] flex-wrap text-center xl:text-[3em] leading-[1.2] font-[900] heading uppercase tracking-[-.02em] text-[#27292a] italic'>Unleash Your Inner Athlete. <span className="text-[#e5202b]">Keep Moving Forward.</span></h1>
             <div className='px-5 flex flex-col lg:flex-row items-center gap-2 lg:gap-10'>
-            <Button bgColor={"red"} redirect={'/'} text={"shop merch"}/>
+            <Button bgColor={"red"} redirect={'/collections/all'} text={"shop merch"}/>
             <Button bgColor={"black"} redirect={'/'} text={"watch now"}/>
             <Button bgColor={"black"} redirect={'/'} text={"studio"}/>
             <Button bgColor={"black"} redirect={'/'} text={"podcast"}/>
