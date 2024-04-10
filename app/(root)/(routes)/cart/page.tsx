@@ -82,7 +82,7 @@ const CartPage = () => {
             <h2>Total ({itemsInCart} items)</h2>
             <h2>R{total} ZAR</h2>
           </div>
-          <button onClick={onCheckout} className="fancy__button p-2 px-4 py-4 lg:py-3 lg:px-5 text-white bg-black text-base cursor-pointer lg:text-lg uppercase font-[500] leading-[1.1]">checkout securely &gt; &gt;</button>
+          <button onClick={onCheckout} className="fancy__button p-2 px-4 py-4 lg:py-3 lg:px-5 text-white bg-black text-base cursor-pointer lg:text-lg uppercase font-[500] leading-[1.1]">checkout securely</button>
       
         </div>
       
