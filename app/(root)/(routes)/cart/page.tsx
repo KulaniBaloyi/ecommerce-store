@@ -2,26 +2,20 @@
 
 import axios from "axios"
 import useCart from "@/hooks/use-cart"
-import GiftIcon from "@/components/ui/icons/gift-icon"
-import { useRouter } from "next/navigation"
+
 import { useEffect, useState } from "react"
-import { PlusIcon,Minus,X } from "lucide-react"
 import Button from "@/components/ui/button"
 import CartItem from "@/components/ui/cart-item"
 
 const CartPage = () => {
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false)
   const cartItems = useCart((state)=>state.items)
-
-  const route = useRouter()
 
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const itemsInCart = cartItems.reduce((acc)=>acc+1,0)
-
-  const freeShippingTargetGoal = 1500.00
+  const itemsInCart = cartItems.reduce((acc,item)=>acc+item.quantity,0)
 
   useEffect(() => {
     setIsMounted(true);
@@ -41,6 +35,7 @@ const CartPage = () => {
     window.location = response.data.url;
   }
 
+  
 
   if(cartItems.length==0)return(
   
@@ -53,21 +48,7 @@ const CartPage = () => {
   return (
     <div className='mt-16  p-[2.5%] lg:p-[5%]'>
       <h1 className="text-center heading mb-5">Your shopping</h1>
-      <section className="m-auto mx-[10%]">
-      <div className=" h-2 rounded-full bg-[#ddd] relative">
-        <div className="bg-black h-full w-1/5 rounded-full relative">
-          <p className="absolute h-2 aspect-square bg-white top-1/2 -translate-y-1/2 right-0 z-20 grid place-content-center p-1 pb-2 rounded-full">
-          <GiftIcon/>
-          </p>
-        </div>
-      </div>
-      <div className="flex justify-between text-xs mt-5">
-        <p>Youre <span className="font-[700]">R200.00 ZAR</span> away from free shipping! </p>
-        <p className="font-[700]">R{freeShippingTargetGoal} ZAR</p>
-      </div>
-      <p className="font-[700] uppercase text-xs">Everything is unlocked!</p>
-      </section>
-      
+
       
       <section className="my-10">
         {cartItems?.map((item)=>{

@@ -1,5 +1,8 @@
+import Link from "next/link";
 import getProducts from "@/actions/get-products"
-import ProductCard from "@/components/ProductCard"
+
+import HeartEmptyIcon from "@/components/ui/icons/heart-empty-icon";
+import Image from "next/image";
 
 interface CollectionPageProps {
   params:{
@@ -7,6 +10,7 @@ interface CollectionPageProps {
   }
  }
 const Collections:React.FC<CollectionPageProps> = async({params}) => {
+
 
   const {collectionId}= params
   const products = await getProducts({categoryId:process.env.CATEGORY_SPORTSBRA})
@@ -34,27 +38,37 @@ const Collections:React.FC<CollectionPageProps> = async({params}) => {
         <h2>Shirts & Tops</h2>
         <h2>Sport Bras</h2>
     </nav>
-    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-10">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mb-10">
       {products.map((prod:any)=>{
-        return <ProductCard key={prod.id} data={prod}/>
+         
+        return (
+        <Link key={prod.id} href={`/product/${prod.id}`}>
+        <div className="w-full truncate flex-shrink-0 flex-grow-0 bg-white min-w-0 cursor-pointer ">
+      
+      <div className="group  grid relative place-content-center border aspect-[12/14] lg:aspect-[1440/1800] w-full">
+        <Image fill src={prod.images[0].url} className="object-cover" alt={prod.name}/>
+        <button className="absolute rounded-full aspect-square h-5 lg:h-8 grid place-content-center top-2 right-2 lg:right-3 lg:top-3">
+       <HeartEmptyIcon/>
+  
+        </button>
+        <p  className=" bg-white/70 border p-2 py-3 text-xs grid place-content-center absolute uppercase h-2 lg:h4 rounded-full aspect-square top-2 left-2 lg:left-3 lg:top-3">
+      New
+  
+        </p>
+  
+      </div>
+      <div className="p-1 lg:p-2 flex flex-col gap-1 ">
+        
+        <p className="title capitalize flex truncate">{prod.name}</p>
+        <p className="title text-[#8d8d8d] ">{prod.color.name}</p>
+        <p className="title text-[#8d8d8d]">R {prod.price} ZAR</p>
+      </div>
+    </div>
+        </Link>  
+  
+        ) 
       })}
-       {/* <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div>
-       <div className="border border-rounded-md w-full image-container"></div> */}
-
+       
     </div>
    </section>
     </div>

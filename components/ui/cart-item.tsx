@@ -34,8 +34,8 @@ const CartItem: React.FC<Props> = (props) => {
     </div>
     <div className="flex flex-col justify-between p-1">
       <ul className="flex flex-col gap-2">
-        <li>{item.name}</li>
-        <li>R{item.price} ZAR</li>
+        <li className="font-[700]">{item.name}</li>
+        <li className="font-[500]">R{item.price} ZAR</li>
       </ul>
       <ul className="flex w-full justify-between lg:justify-normal gap-1 items-center">
         <div className="flex items-center">

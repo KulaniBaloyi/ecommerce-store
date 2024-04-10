@@ -34,11 +34,15 @@ const useCart = create(
     const existingItem = currentItems.find((item) => item.id === data.id);
     
     if (existingItem) {
-      return toast('Item already in cart.');
+      return toast.error('Item already in cart.');
     }
 
     set({ items: [...get().items, data] });
-    toast.success('Item added to cart.');
+    toast.success('Item added to cart.', {
+      style: {
+        zIndex: 999,
+      },
+    })
   },
   increaseQuantity: (idToIncrease: String) => {
     const newCartItems = get().items.map((item) =>
@@ -47,16 +51,23 @@ const useCart = create(
         : item
     );
     set({ items: newCartItems });
-    toast.success("Item quantity increased");
+
   },
   decreaseQuantity: (idToDecrease: String) => {
+    const currentItems = get().items;
+    const existingItem = currentItems.find((item) => item.id === idToDecrease)
+    if(existingItem){
+      set({ items: [...get().items.filter((item) => item.id !== idToDecrease)] });
+      toast.error("item removed from cart")
+    }
     const newCartItems = get().items.map((item) =>
       item.id === idToDecrease
         ? { ...item, quantity: item.quantity - 1 }
         : item
     );
-    set({ items: newCartItems });
-    toast.success("Item quantity decreased");
+    set({ items: newCartItems })
+   
+
   },
   toggleLike:(data:Product)=>{
     const currentLikedItems = get().likes;
@@ -73,7 +84,7 @@ const useCart = create(
   },
   removeItem: (id: string) => {
     set({ items: [...get().items.filter((item) => item.id !== id)] });
-    toast.success('Item removed from cart.');
+    toast.error('Item removed from cart.');
   },
   removeAll: () => set({ items: [] }),
 }), {
