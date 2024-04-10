@@ -7,19 +7,19 @@ import getProducts from "@/actions/get-products";
 
 export default async function Home () {
   
-  const leggings = await getProducts({categoryId:process.env.CATEGORY_LEGGINGS})
+  // const leggings = await getProducts({categoryId:process.env.CATEGORY_LEGGINGS})
 
-  const sportsBras = await getProducts({categoryId:process.env.CATEGORY_SPORTSBRA})
-  const tshirtsandtops = await getProducts({categoryId:process.env.CATEGORY_TSHIRTANDTOPS})
+  // const sportsBras = await getProducts({categoryId:process.env.CATEGORY_SPORTSBRA})
+  // const tshirtsandtops = await getProducts({categoryId:process.env.CATEGORY_TSHIRTANDTOPS})
   return (
    
 <main className="mt-16 min-h-screen">
   <Landing/>
-    <ProductCarousel data={tshirtsandtops} suggested={false}/>
+    {/* <ProductCarousel data={tshirtsandtops} suggested={false}/>
     <Banner/>
     <ProductCarousel data={leggings} suggested={false}/>
     <ShopGrid/>
-    <ProductCarousel data={sportsBras} suggested={false}/>
+    <ProductCarousel data={sportsBras} suggested={false}/> */}
   </main>
   );
 }
