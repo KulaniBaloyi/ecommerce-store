@@ -31,7 +31,7 @@ const {name,price,images,color,size,id}= data
   
   return (
    
-       <div onClick={handleClick} className="w-[180px] md:w-[250px] lg:w-[350px] truncate flex-shrink-0 flex-grow-0 bg-white min-w-0 cursor-pointer ">
+       <div onClick={handleClick} className="w-[180px] md:w-[250px] lg:w-[350px] truncate flex-shrink-0 flex-grow-0 xl:flex-1 bg-white min-w-0 cursor-pointer ">
       
       <div className="group  grid relative place-content-center border aspect-[12/14] lg:aspect-[1440/1800] w-full">
         <Image fill src={images[0].url} className="object-cover" alt={name}/>

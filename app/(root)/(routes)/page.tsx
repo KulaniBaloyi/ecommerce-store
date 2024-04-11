@@ -9,7 +9,7 @@ export default async function Home () {
   
   const leggings = await getProducts({categoryId:process.env.CATEGORY_LEGGINGS})
 
-  const sportsBras = await getProducts({categoryId:process.env.CATEGORY_SPORTSBRA})
+  const sportsBras = await getProducts({categoryId:process.env.CATEGORY_SPORTSBRAS})
   const tshirtsandtops = await getProducts({categoryId:process.env.CATEGORY_TSHIRTANDTOPS})
 
  

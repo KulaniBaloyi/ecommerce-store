@@ -13,7 +13,7 @@ const Collections:React.FC<CollectionPageProps> = async({params}) => {
 
 
   const {collectionId}= params
-  const products = await getProducts({categoryId:process.env.CATEGORY_SPORTSBRA})
+  const products = await getProducts({categoryId:process.env.CATEGORY_SPORTSBRAS})
    
   return (
     <div>
