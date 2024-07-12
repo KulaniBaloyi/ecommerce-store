@@ -2,14 +2,25 @@
 
 import { useRouter } from "next/navigation"
 import Button from "./ui/button"
+import { CldVideoPlayer } from 'next-cloudinary';
+import 'next-cloudinary/dist/cld-video-player.css';
 
 const Landing = ({video}:any) => {
   const route = useRouter()
-  
+
   return (
     <section className='mb-20 w-full h-full max-w-full py-16 landing min-h-[95dvh] grid place-content-center relative overflow-hidden'>
       <div className="absolute inset-0 -z-50">
       {/* <video autoPlay loop src={video}/> */}
+      <CldVideoPlayer
+  width="1920"
+  height="1080"
+  controls={false}
+  autoPlay={true}
+  loop={true}
+  src="https://res.cloudinary.com/kulanicloud/video/upload/v1720796109/dots_qbtqau.mp4"
+/>
+  
       </div>
       
         <section className='flex m-auto flex-col my-16 lg:my-10 lg:gap-20 min-w-full max-w-6xl'>
